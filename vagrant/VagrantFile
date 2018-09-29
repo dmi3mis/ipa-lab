@@ -1,0 +1,240 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  windc_ip     = "172.25.0.100"
+  wincl_ip     = "172.25.0.120"
+  ipa_ip       = "172.25.0.10"
+  srv_ip       = "172.25.0.11"
+  cl1_ip       = "172.25.0.20"
+ 
+  windomainname    = "domain.com"
+  ipadomainname    = "example.com"
+
+
+  config.vagrant.plugins = ["vagrant-vbguest", "vagrant-timezone", "vagrant-hosts", "vagrant-reload" ]
+  config.timezone.value = :host
+
+
+  
+  
+  # VM guest configuration
+  config.vm.box = "centos/7" # Use centos/7 or the label you used when adding the downloaded rhel box, for expl: rhel/7.2
+
+
+  if ENV['VBOX_VM_PATH']
+    vbox_vm_path = ENV['VBOX_VM_PATH']
+  end
+
+  config.vm.define :ipa do |ipa_config|
+    ipa_config.vm.hostname = "ipa.#{ipadomainname}"
+    ipa_config.vm.network :private_network, ip:  ipa_ip
+    ipa_config.vm.provision :shell, path: "scripts/default-provision"
+    ipa_config.vm.provider "virtualbox" do |vbox, override|
+      vbox.cpus   = 1
+      vbox.memory = 1024
+      vbox.name   = "ipa.#{ipadomainname}"
+      vbox.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
+
+    end
+    ipa_config.vm.provider "libvirt" do |libvirt, override|
+      libvirt.cpus   = 1
+      libvirt.memory = 1024
+    end
+  end
+  
+  config.vm.define :srv do |srv_config|
+    srv_config.vm.hostname = "srv.#{ipadomainname}"
+    srv_config.vm.network :private_network, ip:  srv_ip
+    srv_config.vm.provision :shell, path: "scripts/default-provision"
+    
+    srv_config.vm.provider "virtualbox" do |vbox, override|
+      vbox.cpus   = 1
+      vbox.memory = 1024
+      vbox.name   = "srv.#{ipadomainname}"
+      vbox.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
+    end
+    srv_config.vm.provider "libvirt" do |libvirt, override|
+      libvirt.cpus   = 1
+      libvirt.memory = 1024
+    end
+
+	end
+
+  config.vm.define :cl do |cl_config|
+    cl_config.vm.hostname = "cl1.#{ipadomainname}"
+    cl_config.vm.network :private_network, ip:  cl1_ip
+    cl_config.vm.provision :shell, path: "scripts/default-provision"
+    cl_config.vm.provision :shell, path: "scripts/cl1-provision"
+    
+    cl_config.vm.provider "virtualbox" do |vbox, override|
+      vbox.cpus = 2
+      vbox.memory = 4096
+      vbox.name = "cl.#{ipadomainname}"
+      vbox.customize ["modifyvm", :id, "--vram", "32"]
+      vbox.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+      vbox.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
+      vbox.customize ["modifyvm", :id, "--usb", "on"]
+      vbox.customize ["modifyvm", :id, "--usbehci", "on"]
+    end
+
+    cl_config.vm.provider "libvirt" do |libvirt, override|
+      libvirt.cpus   = 1
+      libvirt.memory = 4096
+    end
+  end
+
+  config.vm.define "dc" do |dc_config|
+    dc_config.vm.box = "dmi3mis/Server_2016"
+    dc_config.vm.hostname = "dc"
+    dc_config.vm.boot_timeout = 600
+    # use the plaintext WinRM transport and force it to use basic authentication.
+    # NB this is needed because the default negotiate transport stops working
+    #    after the domain controller is installed.
+    #    see https://groups.google.com/forum/#!topic/vagrant-up/sZantuCM0q4
+    dc_config.winrm.transport = :plaintext
+    dc_config.vm.communicator = "winrm"
+    dc_config.winrm.basic_auth_only = true
+    dc_config.winrm.timeout = 300
+    dc_config.winrm.retry_limit = 20
+    dc_config.vm.network :private_network, ip: windc_ip
+    dc_config.vm.provision "shell", path: "scripts/create-domain.ps1", privileged: true, args: "-ip '#{windc_ip}' -domain '#{windomainname}'"
+    dc_config.vm.provision "shell", path: "scripts/re-enable-autologin.ps1", privileged: true
+    dc_config.vm.provision "shell", path: "scripts/install-bginfo.ps1", privileged: false
+    dc_config.vm.provision "shell", path: "scripts/disable-event-tracker.ps1", privileged: true
+    dc_config.vm.provision "reload"
+    dc_config.vm.provision "shell", path: "scripts/wait-ad.ps1", privileged: true
+
+    dc_config.vm.provider "virtualbox" do |vbox, override|
+      vbox.name = "dc.#{windomainname}"
+      vbox.gui = true
+      vbox.customize ["modifyvm", :id, "--memory", 2560]
+      vbox.customize ["modifyvm", :id, "--cpus", 2]
+      vbox.customize ["modifyvm", :id, "--vram", "32"]
+      vbox.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+      vbox.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
+    end
+
+    dc_config.vm.provider "vmware_fusion" do |vmware_fusion, override|
+      override.vm.box = "dmi3mis/Server_2016"
+      vmware_fusion.memory = 2560
+      vmware_fusion.cpus = 2
+      vmware_fusion.gui = true
+    end
+  
+    dc_config.vm.provider "vmware_desktop" do |vmware_desktop, override|
+      override.vm.box = "dmi3mis/Server_2016"
+      vmware_desktop.memory = 2560
+      vmware_desktop.cpus = 2
+      vmware_desktop.gui = true
+      vmware_desktop.enable_vmrun_ip_lookup = false
+    end
+
+  end
+
+  #   config.vm.define "winsrv" do |winsrv_config|
+  #   winsrv_config.vm.box = "dmi3mis/Server_2016"
+  #   winsrv_config.vm.hostname = "winsrv"
+  #   winsrv_config.vm.boot_timeout = 600
+  #   # use the plaintext WinRM transport and force it to use basic authentication.
+  #   # NB this is needed because the default negotiate transport stops working
+  #   #    after the domain controller is installed.
+  #   #    see https://groups.google.com/forum/#!topic/vagrant-up/sZantuCM0q4
+  #   winsrv_config.winrm.transport = :plaintext
+  #   winsrv_config.vm.communicator = "winrm"
+  #   winsrv_config.winrm.basic_auth_only = true
+  #   winsrv_config.winrm.timeout = 300
+  #   winsrv_config.winrm.retry_limit = 20
+  #   winsrv_config.vm.network :private_network, ip: winsrv_ip
+  #   winsrv_config.vm.provision "shell", path: "scripts/join-domain.ps1", privileged: true, args: "-ip '#{winsrv_ip}' -domain '#{windomainname}' -dns '#{windc_ip}'"
+  #   winsrv_config.vm.provision "shell", path: "scripts/re-enable-autologin.ps1", privileged: true
+  #   winsrv_config.vm.provision "shell", path: "scripts/disable-event-tracker.ps1", privileged: true
+  #   winsrv_config.vm.provision "shell", path: "scripts/install-bginfo.ps1", privileged: false
+  #   winsrv_config.vm.provision "reload"
+      
+      
+  #   winsrv_config.vm.provider "virtualbox" do |vbox, override|
+  #     vbox.gui = true
+  #     vbox.name = "winsrv.#{windomainname}"
+  #     vbox.customize ["modifyvm", :id, "--memory", 2048]
+  #     vbox.customize ["modifyvm", :id, "--cpus", 1]
+  #     vbox.customize ["modifyvm", :id, "--vram", "32"]
+  #     vbox.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+  #     vbox.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
+  #   end
+
+  #   winsrv_config.vm.provider "vmware_fusion" do |vmware_fusion, override|
+  #     override.vm.box = "dmi3mis/Server_2016"
+  #     vmware_fusion.vmx["gui.fullscreenatpoweron"] = "FALSE"
+  #     vmware_fusion.vmx["gui.viewModeAtPowerOn"] = "windowed"
+  #     vmware_fusion.vmx["gui.fitguestusingnativedisplayresolution"] = "FALSE"
+  #     vmware_fusion.memory = 2048
+  #     vmware_fusion.cpus = 1
+  #     vmware_fusion.gui = true
+  #   end
+
+  #   winsrv_config.vm.provider "vmware_desktop" do |vmware_desktop, override|
+  #     override.vm.box = "dmi3mis/Server_2016"
+  #     vmware_desktop.vmx["gui.fullscreenatpoweron"] = "FALSE"
+  #     vmware_desktop.vmx["gui.viewModeAtPowerOn"] = "windowed"
+  #     vmware_desktop.memory = 2048
+  #     vmware_desktop.cpus = 1
+  #     vmware_desktop.gui = true
+  #     vmware_desktop.enable_vmrun_ip_lookup = false
+  #   end
+  # end
+
+  
+  config.vm.define "wincl" do |wincl_config|
+    wincl_config.vm.box = "dmi3mis/Windows_10"
+    wincl_config.vm.hostname = "wincl"
+    wincl_config.vm.boot_timeout = 600
+    # use the plaintext WinRM transport and force it to use basic authentication.
+    # NB this is needed because the default negotiate transport stops working
+    #    after the domain controller is installed.
+    #    see https://groups.google.com/forum/#!topic/vagrant-up/sZantuCM0q4
+    wincl_config.winrm.transport = :plaintext
+    wincl_config.vm.communicator = "winrm"
+    wincl_config.winrm.basic_auth_only = true
+    wincl_config.winrm.timeout = 300
+    wincl_config.winrm.retry_limit = 20
+    wincl_config.vm.network :private_network, ip: wincl_ip
+    wincl_config.vm.provision "shell", path: "scripts/join-domain.ps1", privileged: true, args: "-ip '#{wincl_ip}' -domain '#{windomainname}' -dns '#{windc_ip}'"
+    wincl_config.vm.provision "shell", path: "scripts/re-enable-autologin.ps1", privileged: true
+    wincl_config.vm.provision "shell", path: "scripts/MakeWindows10lookGreatAgain.ps1", privileged: true
+    wincl_config.vm.provision "shell", path: "scripts/install-bginfo.ps1", privileged: false
+    wincl_config.vm.provision "reload"
+    
+    
+    wincl_config.vm.provider "virtualbox" do |vbox, override|
+      vbox.gui = true
+      vbox.name = "wincl.#{windomainname}"
+      vbox.customize ["modifyvm", :id, "--memory", 2048]
+      vbox.customize ["modifyvm", :id, "--cpus", 1]
+      vbox.customize ["modifyvm", :id, "--vram", "32"]
+      vbox.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+      vbox.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
+      end
+
+    wincl_config.vm.provider "vmware_fusion" do |vmware_fusion, override|
+      override.vm.box = "dmi3mis/windows_10"
+      vmware_fusion.vmx["gui.fullscreenatpoweron"] = "FALSE"
+      vmware_fusion.vmx["gui.viewModeAtPowerOn"] = "windowed"
+      vmware_fusion.vmx["gui.fitguestusingnativedisplayresolution"] = "FALSE"
+      vmware_fusion.memory = 2048
+      vmware_fusion.cpus = 1
+      vmware_fusion.gui = true
+      end
+  
+    wincl_config.vm.provider "vmware_desktop" do |vmware_desktop, override|
+      override.vm.box = "dmi3mis/windows_10"
+      vmware_desktop.vmx["gui.fullscreenatpoweron"] = "FALSE"
+      vmware_desktop.vmx["gui.viewModeAtPowerOn"] = "windowed"
+      vmware_desktop.memory = 2048
+      vmware_desktop.cpus = 1
+      vmware_desktop.gui = true
+      vmware_desktop.enable_vmrun_ip_lookup = false
+      end
+    end
+end

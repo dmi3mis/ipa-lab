@@ -1,0 +1,2425 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>IPA-LAB-Instructions.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-gnulinux-ipa-%D1%81-microsoft-active-directory">Интеграция GNU/Linux IPA с Microsoft Active Directory</h1>
+<p>Отделу IT в компании &quot;РиК&quot; была поставлена задача централизованного управления учетными данными всех рабочих станций и серверов, работающих как GNU/Linux, так и на Microsoft Windows. В компании в данный момент работает Active Directory домен и все сервера и рабочие станции с Microsoft Windows были добавлены в него. Необходимо настроить централизованную аутентификацию как клиентов, так и серверов. Для решения данной задачи со стороны GNU/Linux был выбран FreeIPA сервер. Также предполагается настроить централизованное управление правами доступа, и правилами sudo для клиентов и серверов.</p>
+<p>По окончанию данной лабораторной работы вы сможете:</p>
+<ul>
+<li>Установить и настроить FreeIPA сервер</li>
+<li>Создавать пользователей, группы, настроить парольные политики.</li>
+<li>Настроить двухфакторную аутентификацию при входе.</li>
+<li>Установить клиента FreeIPA и подключить компьютер у FreeIPA домену.</li>
+<li>Управлять пользователями и группами хостов.</li>
+<li>Интегрировать FreeIPA с Active Directory.</li>
+<li>Настроить роли и права администраторов FreeIPA домена.</li>
+<li>Создать высокодоступную конфигурацию FreeIPA домена, состоящую из двух серверов с настроенной репликацией.</li>
+<li>Настроить Web, Smb, Nfs сервисы на работу cовместно с FreeIPA доменом.</li>
+</ul>
+<h1 id="%D0%BE%D0%B3%D0%BB%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5">Оглавление</h1>
+<!-- TOC -->
+<ul>
+<li><a href="#%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-gnulinux-ipa-%D1%81-microsoft-active-directory">Интеграция GNU/Linux IPA с Microsoft Active Directory</a></li>
+<li><a href="#%D0%BE%D0%B3%D0%BB%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5">Оглавление</a>
+<ul>
+<li><a href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-1-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-freeipa-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0-%D0%B8-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D0%B0">Упражнение 1: Установка и настройка FreeIPA сервера и домена</a>
+<ul>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1-%D0%BF%D1%80%D0%B5%D0%B4%D0%B2%D0%B0%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8%D0%BC%D0%B5%D0%BD-%D0%B8-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2">Задача 1: Предварительная подготовка разрешения имен и установка пакетов</a></li>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-freeipa-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0">Задача 2. Настройка FreeIPA сервера</a>
+<ul>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-3-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8-%D0%BD%D0%B0-%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D0%B8-%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D1%82%D0%B8%D0%BF%D0%BE%D0%B2%D1%8B%D1%85-%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC">Задача 3. Проверка установки на ошибки. Решение типовых проблем</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-2-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D0%B0%D1%80%D0%BE%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA-%D0%B4%D0%B2%D1%83%D1%85%D1%84%D0%B0%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F">Упражнение 2: Создание пользователей, настройка парольных политик. Двухфакторная аутентификация</a>
+<ul>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1-%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F%D0%BC%D0%B8">Задача 1: Управление пользователями</a></li>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D0%B0%D1%80%D0%BE%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA">Задача 2: Настройка парольных политик</a></li>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-3-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-freeotp-%D0%BD%D0%B0-freeipa-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B5">Задача 3: Настройка FreeOTP на FreeIPA сервере</a>
+<ul>
+<li><a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B4%D0%B2%D1%83%D1%85%D1%84%D0%B0%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8-freeotp-%D0%BD%D0%B0-ipa-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B5">Настройка двухфакторной аутентификации FreeOTP на IPA сервере</a></li>
+<li><a href="#%D1%80%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-otp-%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%D0%B0-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%B2-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B8-freeotp-authentificator">Регистрация OTP токена безопасности в приложении <code>FreeOTP Authentificator</code></a></li>
+<li><a href="#%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%B2%D1%85%D0%BE%D0%B4%D0%B0-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D0%BE%D0%B4%D0%BD%D0%BE%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%BE%D0%B3%D0%BE-%D0%BF%D0%B0%D1%80%D0%BE%D0%BB%D1%8F">Проверка входа с помощью одноразового пароля</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-3-%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%BE%D0%B2-%D0%B8-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D1%85-%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D0%B9-%D0%BA-freeipa-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D1%83">Упражнение 3: Подключение серверов и рабочих станций к FreeIPA домену</a>
+<ul>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1-%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BA-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D1%83-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2">Задача 1: Подключение к домену. Установка и настройка пакетов</a></li>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-samba-nfs-%D0%B8-http-apache-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%B2-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D1%81-ipa">Задача 2. Установка настройка Samba, NFS и HTTP Apache сервисов, интегрированных с IPA</a>
+<ul>
+<li><a href="#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-spn-%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B5%D0%B9-%D0%B3%D0%B5%D0%BD%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F-keytab-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2">Установка пакетов, создание SPN-записей, генерация keytab-файлов</a></li>
+<li><a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-nfs-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0-%D1%81-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%BE%D0%B9-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8-kerberos-%D0%B8-autofs-kerberized-nfs-server">Настройка NFS сервера с поддержкой аутентификации Kerberos и autofs (&quot;Kerberized NFS Server&quot;)</a></li>
+<li><a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-openssh-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0-%D1%81-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%BE%D0%B9-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8-kerberos">Настройка OpenSSH сервера с поддержкой аутентификации Kerberos</a></li>
+<li><a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-samba-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0-%D1%81-sssd-%D0%B8-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B5%D0%B9-ipa">Настройка Samba сервера с sssd и аутентификацией IPA</a></li>
+<li><a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B2%D0%B5%D0%B1-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0-apache-%D1%81-https-%D0%B8-kerberos-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B5%D0%B9">Настройка веб сервера Apache с HTTPS и Kerberos аутентификацией</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-4-%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B8-%D1%85%D0%BE%D1%81%D1%82%D0%BE%D0%B2">Упражнение 4: Управление группами пользователей и хостов</a></li>
+<li><a href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-5-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-ipa-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D0%B0-%D1%81-active-directory">Упражнение 5: Интеграция IPA домена с Active Directory</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<p>Описание тестовой среды</p>
+<p><img src="resources/lab.png" alt="lab" title="Схема тестовой среды"></p>
+<p>Предположительное время: 1 час 30 минут
+Виртуальные машины: ipa.example.com, cl.example.com, srv.example.com, dc.domain.com, wincl.domain.com</p>
+<table>
+<thead>
+<tr>
+<th>Логин</th>
+<th>Пароль</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>root</td>
+<td>redhat</td>
+</tr>
+<tr>
+<td>vagrant</td>
+<td>vagrant</td>
+</tr>
+<tr>
+<td>DOMAIN\vagrant</td>
+<td>vagrant</td>
+</tr>
+</tbody>
+</table>
+<h2 id="%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-1-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-freeipa-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0-%D0%B8-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D0%B0">Упражнение 1: Установка и настройка FreeIPA сервера и домена</h2>
+<p>В данный момент в компании &quot;РиК&quot; не установлен FreeIPA сервер и домен. Необходимо произвести его установку и предварительную настройку.</p>
+<ol>
+<li>Предварительная подготовка разрешения имен и установка пакетов</li>
+<li>Настройка FreeIPA сервера</li>
+<li>Проверка установки на ошибки. Решение типовых проблем.</li>
+</ol>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1-%D0%BF%D1%80%D0%B5%D0%B4%D0%B2%D0%B0%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B0-%D1%80%D0%B0%D0%B7%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8%D0%BC%D0%B5%D0%BD-%D0%B8-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2">Задача 1: Предварительная подготовка разрешения имен и установка пакетов</h3>
+<p>Выполните вход в систему на виртуальной машине <code>ipa.example.com</code>, используя учетную запись <code>vagrant</code> и пароль <code>vagrant</code>.</p>
+<p>Убедитесь, что в файле /etc/hosts находятся строки</p>
+<pre class="hljs"><code><div>127.0.0.1    localhost.localdomain localhost
+172.25.0.10  ipa.example.com       ipa
+
+</div></code></pre>
+<p>Если в файле уже существовали строки с текстом <code>ipa</code>, то замените их.
+Если таких строк там нет, то добавьте их.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ sudo sed -i /.*ipa.*/d /etc/hosts
+[vagrant@ipa ~]$ sudo <span class="hljs-built_in">echo</span> <span class="hljs-string">'172.25.0.10  ipa.example.com  ipa'</span> &gt;&gt; /etc/hosts
+</div></code></pre>
+<p>Настроим разрешение имен сервера <code>ipa.example.com</code> на localhost.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ sudo nmcli conn modify System\ eth0 ipv4.ignore-auto-dns <span class="hljs-literal">true</span>
+[vagrant@ipa ~]$ sudo nmcli conn up System\ eth0
+[vagrant@ipa ~]$ sudo nmcli conn modify System\ eth1 ipv4.dns 127.0.0.1
+[vagrant@ipa ~]$ sudo nmcli conn up System\ eth1
+[vagrant@ipa ~]$ cat /etc/resolv.conf
+<span class="hljs-comment"># Generated by NetworkManager</span>
+search example.com
+nameserver 127.0.0.1
+</div></code></pre>
+<p>Установите пакеты, необходимые для FreeIPA сервера</p>
+<pre class="hljs"><code><div> <span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">yum</span> <span class="hljs-selector-tag">-y</span> <span class="hljs-selector-tag">install</span> <span class="hljs-selector-tag">bind</span> <span class="hljs-selector-tag">bind-utils</span> <span class="hljs-selector-tag">bind-dyndb-ldap</span> <span class="hljs-selector-tag">ipa-server</span> <span class="hljs-selector-tag">ipa-server-dns</span>
+</div></code></pre>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-freeipa-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0">Задача 2. Настройка FreeIPA сервера</h3>
+<ol>
+<li>Запустите настройку из из под суперпользователя</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">ipa-server-install</span> <span class="hljs-selector-tag">--setup-dns</span> <span class="hljs-selector-tag">--ssh-trust-dns</span> <span class="hljs-selector-tag">--mkhomedir</span> <span class="hljs-selector-tag">--allow-zone-overlap</span>
+</div></code></pre>
+<p>Ответьте на вопросы помощника так, как показано в примере</p>
+<pre class="hljs"><code><div>...
+Server host name [idm-server.example.com]: &lt;Enter&gt;
+...
+Please confirm the domain name [example.com]: &lt;Enter&gt;
+...
+Please provide a realm name [EXAMPLE.COM]: &lt;Enter&gt;
+... Directory Manager password: &lt; <span class="hljs-string">"password"</span> &gt;
+Password (confirm): &lt; <span class="hljs-string">"password"</span> &gt;
+...
+IPA admin password: &lt; <span class="hljs-string">"password"</span> &gt;
+Password (confirm): &lt; <span class="hljs-string">"password"</span> &gt;
+...
+Do you want to configure DNS forwarders? [yes]: Yes
+...
+Enter IP address <span class="hljs-keyword">for</span> a DNS forwarder: &lt;Enter&gt;
+...
+Do you want to configure the reverse zone? [yes]: Yes
+...
+Continue to configure the system with these values? [no]: Yes
+...
+Domain name: example.com
+</div></code></pre>
+<p>В конце мастера должны получить примерно такое сообщение</p>
+<pre class="hljs"><code><div>The IPA Master Server will be configured with:
+Hostname:       ipa.example.com
+IP address(es): 172.25.0.10
+Domain name:    example.com
+Realm name:     EXAMPLE.COM
+
+BIND DNS server will be configured to serve IPA domain with:
+Forwarders:       No forwarders
+Forward policy:   only
+Reverse zone(s):  0.25.172.in-addr.arpa.
+
+Continue to configure the system with these values? [no]: Yes
+...
+...
+The ipa-client-install <span class="hljs-built_in">command</span> was successful
+
+==============================================================================
+Setup complete
+
+Next steps:
+        1. You must make sure these network ports are open:
+                TCP Ports:
+                  * 80, 443: HTTP/HTTPS
+                  * 389, 636: LDAP/LDAPS
+                  * 88, 464: kerberos
+                  * 53: <span class="hljs-built_in">bind</span>
+                UDP Ports:
+                  * 88, 464: kerberos
+                  * 53: <span class="hljs-built_in">bind</span>
+                  * 123: ntp
+
+        2. You can now obtain a kerberos ticket using the <span class="hljs-built_in">command</span>: <span class="hljs-string">'kinit admin'</span>
+           This ticket will allow you to use the IPA tools (e.g., ipa user-add)
+           and the web user interface.
+
+Be sure to back up the CA certificates stored <span class="hljs-keyword">in</span> /root/cacert.p12
+These files are required to create replicas. The password <span class="hljs-keyword">for</span> these
+files is the Directory Manager password
+[vagrant@ipa ~]$
+</div></code></pre>
+<p>Вместе с FreeIPA сервером установились некоторые дополнительные службы, такие как <code>389 Directory Server</code>, <code>MIT Kerberos Server</code>, <code>ISC BIND 9</code>,<code>HTTP Apache Server</code>, и т.д. Проверим утилитой <code>ipactl</code>, что их службы запущены и работают. С помощью утилиты <code>ipactl</code> вы можете управлять всеми службами сервера, что имеют отношение к работе FreeIPA.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ sudo ipactl status
+Directory Service: RUNNING
+krb5kdc Service: RUNNING
+kadmin Service: RUNNING
+named Service: RUNNING
+httpd Service: RUNNING
+ipa-custodia Service: RUNNING
+ntpd Service: RUNNING
+pki-tomcatd Service: RUNNING
+ipa-otpd Service: RUNNING
+ipa-dnskeysyncd Service: RUNNING
+ipa: INFO: The ipactl <span class="hljs-built_in">command</span> was successful
+</div></code></pre>
+<p>Проверим, что DNS PTR записи в обратной зоне dns <code>0.25.172.in-addr.apra</code> будут создаваться/обновляться при присоединении компьютеров.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$  ipa dnszone-mod example.com --allow-sync-ptr=<span class="hljs-literal">true</span>
+  Zone name: example.com.
+  Active zone: TRUE
+  Authoritative nameserver: ipa.example.com.
+  Administrator e-mail address: hostmaster.example.com.
+  SOA serial: 1536572066
+  SOA refresh: 3600
+  SOA retry: 900
+  SOA expire: 1209600
+  SOA minimum: 3600
+  Allow query: any;
+  Allow transfer: none;
+  Allow PTR sync: TRUE
+</div></code></pre>
+<p>Копия всех сообщений пишется в файл журнала /var/log/ipaserver-install.log.</p>
+<p>Откроем необходимые порты для FreeIPA сервера в firewalld</p>
+<pre class="hljs"><code><div><span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">firewall-cmd</span> <span class="hljs-selector-tag">--add-service</span>=<span class="hljs-selector-tag">http</span> <span class="hljs-selector-tag">--permanent</span>
+<span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">firewall-cmd</span> <span class="hljs-selector-tag">--add-service</span>=<span class="hljs-selector-tag">https</span> <span class="hljs-selector-tag">--permanent</span>
+<span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">firewall-cmd</span> <span class="hljs-selector-tag">--add-service</span>=<span class="hljs-selector-tag">freeipa-ldap</span> <span class="hljs-selector-tag">--permanent</span>
+<span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">firewall-cmd</span> <span class="hljs-selector-tag">--add-service</span>=<span class="hljs-selector-tag">freeipa-ldaps</span> <span class="hljs-selector-tag">--permanent</span>
+<span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">firewall-cmd</span> <span class="hljs-selector-tag">--add-service</span>=<span class="hljs-selector-tag">freeipa-replication</span> <span class="hljs-selector-tag">--permanent</span>
+<span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">firewall-cmd</span> <span class="hljs-selector-tag">--add-service</span>=<span class="hljs-selector-tag">freeipa-trust</span> <span class="hljs-selector-tag">--permanent</span>
+<span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">firewall-cmd</span> <span class="hljs-selector-tag">--add-service</span>=<span class="hljs-selector-tag">kerberos</span> <span class="hljs-selector-tag">--permanent</span>
+<span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">firewall-cmd</span> <span class="hljs-selector-tag">--add-service</span>=<span class="hljs-selector-tag">dns</span> <span class="hljs-selector-tag">--permanent</span>
+<span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">firewall-cmd</span> <span class="hljs-selector-tag">--add-service</span>=<span class="hljs-selector-tag">ntp</span> <span class="hljs-selector-tag">--permanent</span>
+<span class="hljs-selector-attr">[vagrant@ipa ~]</span>$ <span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">firewall-cmd</span> <span class="hljs-selector-tag">--reload</span>
+</div></code></pre>
+<h4 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-3-%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B8-%D0%BD%D0%B0-%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D0%B8-%D1%80%D0%B5%D1%88%D0%B5%D0%BD%D0%B8%D0%B5-%D1%82%D0%B8%D0%BF%D0%BE%D0%B2%D1%8B%D1%85-%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC">Задача 3. Проверка установки на ошибки. Решение типовых проблем</h4>
+<p>Проделайте действия на: cl.example.com</p>
+<ul>
+<li>
+<p>Зайдите интерактивно в среду рабочего стола &quot;Gnome Enviroment&quot;с логином <code>vagrant</code> и паролем <code>vagrant</code>.</p>
+</li>
+<li>
+<p>Ответьте по умолчанию на вопросы мастера начальной настройки &quot;Gnome Enviroment&quot;.</p>
+</li>
+<li>
+<p>Настройте разрешение имен dns через ipa сервер <code>ipa.example.com</code></p>
+</li>
+</ul>
+<p>Запустите &quot;Gnome Terminal&quot; и дайте команды</p>
+<pre class="hljs"><code><div>[vagrant@cl ~]$ sudo nmcli conn modify System\ eth0 ipv4.ignore-auto-dns <span class="hljs-literal">true</span>
+[vagrant@cl ~]$ sudo nmcli conn up System\ eth0
+[vagrant@cl ~]$ sudo nmcli conn modify System\ eth1 ipv4.dns 172.25.0.10
+[vagrant@cl ~]$ sudo nmcli conn up System\ eth1
+</div></code></pre>
+<p>Убедитесь, что файл /etc/resolv.conf теперь содержит такие строки.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ cat /etc/resolv.conf
+</div></code></pre>
+<pre class="hljs"><code><div># Generated by NetworkManager
+search example.com
+nameserver 172.25.0.10
+</div></code></pre>
+<p>Проверим, что имя сервера <code>ipa.example.com</code> теперь разрешается со стороны клиента.</p>
+<pre class="hljs"><code><div>[vagrant@cl ~]$ nslookup ipa.example.com
+Server:   172.25.0.10
+Address:  172.25.0.10<span class="hljs-comment">#54</span>
+
+Name: ipa.example.com
+Address: 172.25.0.10
+</div></code></pre>
+<ul>
+<li>Проверим возможность подключиться к веб-интерфейсу настройки FreeIPA сервера с помощью веб-браузера.</li>
+</ul>
+<p>Запустите <code>Firefox Web Browser</code> и откройте <a href="https://ipa.example.com">https://ipa.example.com</a>. В окне &quot;Your Connection is not secure&quot; нажмите <em>Advanced</em> --&gt; <em>Add Exception...</em> --&gt; <em>Confirm Security Exception</em>. В форме доступа введите ранее указанный в мастере настройки логин администратора FreeIPA домена <code>admin</code> и его пароль <code>password</code>.
+Должно появиться такое окно.</p>
+<p><img src="resources/ipa_webadmin.png" alt="ipa-webadmin" title="Веб-интерфейс Администрирования FreeIPA Сервера"></p>
+<p>Веб-интерфейс FreeIPA сервера мультиязычен. Русский язык в веб-интерфейса можно отобразить, если в настройках браузера в списке предпочитаемых языков для запрашиваемых страниц добавить первым &quot;Русский язык&quot;</p>
+<p><img src="resources/firefox_language.png" alt="firefox-choose-language" title="Окно выбора предпочитаемых языков для запрашиваемых страниц"></p>
+<p>Пока мы только проверили возможность открыть веб-интерфейс. Ничего делать внутри пока нет необходимости.</p>
+<p>Проделайте действия на : ipa.example.com</p>
+<ul>
+<li>Получите билет Kerberos</li>
+</ul>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ kinit admin
+Password <span class="hljs-keyword">for</span> admin@EXAMPLE.COM:
+[vagrant@ipa ~]$ klist
+Ticket cache: KEYRING:persistent:1000:1000
+Default principal: admin@EXAMPLE.COM
+
+Valid starting       Expires              Service principal
+09/06/2018 04:46:51  09/07/2018 04:46:48  krbtgt/EXAMPLE.COM@EXAMPLE.COM
+</div></code></pre>
+<ul>
+<li>Проверьте созданные ресурсные записи на DNS сервере</li>
+</ul>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa dnszone-find
+  Zone name: 0.25.172.in-addr.arpa.
+  Active zone: TRUE
+  Authoritative nameserver: ipa.example.com.
+  Administrator e-mail address: hostmaster.example.com.
+  SOA serial: 1536149776
+  SOA refresh: 3600
+  SOA retry: 900
+  SOA expire: 1209600
+  SOA minimum: 3600
+  Allow query: any;
+  Allow transfer: none;
+
+  Zone name: example.com.
+  Active zone: TRUE
+  Authoritative nameserver: ipa.example.com.
+  Administrator e-mail address: hostmaster.example.com.
+  SOA serial: 1536149809
+  SOA refresh: 3600
+  SOA retry: 900
+  SOA expire: 1209600
+  SOA minimum: 3600
+  Allow query: any;
+  Allow transfer: none;
+----------------------------
+Number of entries returned 2
+----------------------------
+[vagrant@ipa ~]$ ipa dnsrecord-find example.com --name=ipa  --all
+  dn: idnsname=ipa,idnsname=example.com.,cn=dns,dc=example,dc=com
+  Record name: ipa
+  Time to live: 1200
+  A record: 172.25.0.10
+  SSHFP record: 1 1 B4A11E2F2AFB8EF4F3ACF513C199B051EA5AB7A4, 1 2
+                C80E2D1676FDF8D544370566D2EE20BD6D41F7434314D6C668019A0D 65AAD7A8, 3 1
+                20522BE298E2ED30EA8C3330AD8B3C5714889F3D, 3 2 58E31BACE0277621DE153B24A82E3FB5C5A715DFBC0E55F1D94F4D90
+                73BD2B4E, 4 1 7A0D4855C74C0BE213E8968D0CE5ADEE6ED5C063, 4 2
+                F34432C411D5DDEB0325AFC2C1C7032D36D87330982B96484EF0313B 7DC58B29
+  objectclass: top, idnsrecord
+----------------------------
+Number of entries returned 1
+----------------------------
+</div></code></pre>
+<ul>
+<li>Проверьте настройки по умолчанию</li>
+</ul>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa config-show
+  Maximum username length: 32
+  Home directory base: /home
+  Default shell: /bin/sh
+  Default users group: ipausers
+  Default e-mail domain: example.com
+  Search time <span class="hljs-built_in">limit</span>: 2
+  Search size <span class="hljs-built_in">limit</span>: 100
+  User search fields: uid,givenname,sn,telephonenumber,ou,title
+  Group search fields: cn,description
+  Enable migration mode: FALSE
+  Certificate Subject base: O=EXAMPLE.COM
+  Password Expiration Notification (days): 4
+  Password plugin features: AllowNThash, KDC:Disable Last Success
+  SELinux user map order: guest_u:s0<span class="hljs-variable">$xguest_u</span>:s0<span class="hljs-variable">$user_u</span>:s0<span class="hljs-variable">$staff_u</span>:s0-s0:c0.c1023<span class="hljs-variable">$unconfined_u</span>:s0-s0:c0.c1023
+  Default SELinux user: unconfined_u:s0-s0:c0.c1023
+  Default PAC types: MS-PAC, nfs:NONE
+  IPA masters: ipa.example.com
+  IPA CA servers: ipa.example.com
+  IPA NTP servers: ipa.example.com
+  IPA CA renewal master: ipa.example.com
+  IPA master capable of PKINIT: ipa.example.com
+
+</div></code></pre>
+<p>Изменим командную оболочку по умолчанию с <code>/bin/sh</code> на привычную в GNU/Linux <code>/bin/bash</code>.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa config-mod --defaultshell=/bin/bash
+...
+  Default shell: /bin/bash
+...
+</div></code></pre>
+<ul>
+<li>В случае проблем, проверьте содержимое файлов журналов на ошибки</li>
+</ul>
+<pre class="hljs"><code><div>/var/<span class="hljs-built_in">log</span>/pki-ca/debug
+/var/<span class="hljs-built_in">log</span>/pki-ca-install.log <span class="hljs-comment">#Журнал установки Центра Сертификации DogTag CA</span>
+/var/<span class="hljs-built_in">log</span>/dirsrv/ <span class="hljs-comment">#Каталог журналов, куда попадают сообщения службы каталога</span>
+/var/<span class="hljs-built_in">log</span>/messages
+</div></code></pre>
+<ul>
+<li>Типовые ошибки во время установки:
+<ul>
+<li>Неправильные настройки разрешенения имен DNS.</li>
+<li>Файлы конфигурации и сертификатов, оставшиеся с предыдущих установок FreeIPA.</li>
+<li>Проблемы синхронизации времени.</li>
+</ul>
+</li>
+</ul>
+<h2 id="%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-2-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D0%B0%D1%80%D0%BE%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA-%D0%B4%D0%B2%D1%83%D1%85%D1%84%D0%B0%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F">Упражнение 2: Создание пользователей, настройка парольных политик. Двухфакторная аутентификация</h2>
+<p>FreeIPA домен создан. Теперь нужно завести в нём пользователей и задать им политики паролей. Настроить двухфакторную аутентификацию.</p>
+<ol>
+<li>Управление пользователями</li>
+<li>Создание парольных политик</li>
+<li>Настройка Двухфакторной аутентификации</li>
+</ol>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1-%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F%D0%BC%D0%B8">Задача 1: Управление пользователями</h3>
+<p>Создадим пользователей внутри FreeIPA домена с помощью инструментов командной строки.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa user-add
+First name: Ivan
+Last name: Petrov
+User login [ipetrov]:
+--------------------
+Added user <span class="hljs-string">"ipetrov"</span>
+--------------------
+  User login: ipetrov
+  First name: Ivan
+  Last name: Petrov
+  Full name: Ivan Petrov
+  Display name: Ivan Petrov
+  Initials: IP
+  Home directory: /home/ipetrov
+  GECOS: Ivan Petrov
+  Login shell: /bin/bash
+  Principal name: ipetrov@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: ipetrov@EXAMPLE.COM
+  Email address: ipetrov@example.com
+  UID: 1896200004
+  GID: 1896200004
+  Password: False
+  Member of groups: ipausers
+  Kerberos keys available: False
+</div></code></pre>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa user-add --first=Pavel --last=Popov ppv
+----------------
+Added user <span class="hljs-string">"ppv"</span>
+----------------
+  User login: ppv
+  First name: Pavel
+  Last name: Popov
+  Full name: Pavel Popov
+  Display name: Pavel Popov
+  Initials: PP
+  Home directory: /home/ppv
+  GECOS: Pavel Popov
+  Login shell: /bin/bash
+  Principal name: ppv@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: ppv@EXAMPLE.COM
+  Email address: ppv@example.com
+  UID: 1896200007
+  GID: 1896200007
+  Password: False
+  Member of groups: ipausers
+  Kerberos keys available: False
+</div></code></pre>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa user-add   --first=Larisa \
+                                --last=Vasileva \
+                                --manager=ppopov \
+                                --email=lvas@example.com \
+                                --homedir=/home/lvas lvas
+-----------------
+Added user <span class="hljs-string">"lvas"</span>
+-----------------
+  User login: lvas
+  First name: Larisa
+  Last name: Vasileva
+  Full name: Larisa Vasileva
+  Display name: Larisa Vasileva
+  Initials: LV
+  Home directory: /home/lvas
+  GECOS: Larisa Vasileva
+  Login shell: /bin/bash
+  Principal name: lvas@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: lvas@EXAMPLE.COM
+  Email address: lvas@example.com
+  UID: 1896200006
+  GID: 1896200006
+  Manager: ppopov
+  Password: False
+  Member of groups: ipausers
+  Kerberos keys available: False
+</div></code></pre>
+<p>Изменим параметры пользователей через командную строку.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa user-show ppv
+  User login: ppv
+  First name: Pavel
+  Last name: Popov
+  Home directory: /home/ppv
+  Login shell: /bin/bash
+  Principal name: ppv@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: ppv@EXAMPLE.COM
+  Email address: ppv@example.com
+  UID: 1896200007
+  GID: 1896200007
+  Account disabled: False
+  Password: False
+  Member of groups: ipausers
+  Kerberos keys available: False
+</div></code></pre>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa user-mod ppv --addattr=l=<span class="hljs-string">"Moscow"</span>
+-------------------
+Modified user <span class="hljs-string">"ppv"</span>
+-------------------
+  User login: ppv
+  First name: Pavel
+  Last name: Popov
+  Home directory: /home/ppv
+  Login shell: /bin/bash
+  Principal name: ppv@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: ppv@EXAMPLE.COM
+  Email address: ppv@example.com
+  UID: 1896200007
+  GID: 1896200007
+  City: Moscow
+  Account disabled: False
+  Password: False
+  Member of groups: ipausers
+  Kerberos keys available: False
+</div></code></pre>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa user-mod ppv --addattr=title=<span class="hljs-string">"Manager"</span>
+-------------------
+Modified user <span class="hljs-string">"ppv"</span>
+-------------------
+  User login: ppv
+  First name: Pavel
+  Last name: Popov
+  Home directory: /home/ppv
+  Login shell: /bin/bash
+  Principal name: ppv@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: ppv@EXAMPLE.COM
+  Email address: ppv@example.com
+  UID: 1896200007
+  GID: 1896200007
+  Job Title: Manager
+  Account disabled: False
+  Password: False
+  Member of groups: ipausers
+  Kerberos keys available: False
+</div></code></pre>
+<p>Установим пользователям пароль для первоначального входа.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa user-mod ppv --password
+Password: &lt;Введите `initialpass`&gt;
+Enter Password again to verify: &lt;Введите `initialpass`&gt;
+-------------------
+Modified user <span class="hljs-string">"ppv"</span>
+-------------------
+  User login: ppv
+  First name: Pavel
+  Last name: Popov
+  Home directory: /home/ppv
+  Login shell: /bin/bash
+  Principal name: ppv@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: ppv@EXAMPLE.COM
+  Email address: ppv@example.com
+  UID: 1896200007
+  GID: 1896200007
+  Job Title: Manager
+  Account disabled: False
+  Password: True
+  Member of groups: ipausers
+  Kerberos keys available: True
+[vagrant@ipa ~]$
+
+[vagrant@ipa ~]$ ipa user-mod lvas --password
+...
+[vagrant@ipa ~]$ ipa user-mod ipetrov --password
+...
+
+</div></code></pre>
+<p>Убедимся, что доменные пользователи были созданы.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ id ppv
+uid=1896200007(ppv) gid=1896200007(ppv) groups=1896200007(ppv)
+[vagrant@ipa ~]$ id lvas
+uid=1896200006(lvas) gid=1896200006(lvas) groups=1896200006(lvas)
+[vagrant@ipa ~]$ id ipetrov
+uid=1896200004(ipetrov) gid=1896200004(ipetrov) groups=1896200004(ipetrov)
+[vagrant@ipa ~]$ getent passwd ppv
+ppv:*:1896200007:1896200007:Pavel Popov:/home/ppv:/bin/bash
+[vagrant@ipa ~]$ getent passwd lvas
+lvas:*:1896200006:1896200006:Larisa Vasileva:/home/lvas:/bin/bash
+[vagrant@ipa ~]$ getent passwd ipetrov
+ipetrov:*:1896200004:1896200004:Ivan Petrov:/home/ipetrov:/bin/bash
+</div></code></pre>
+<p>Частные пользовательские группы также были созданы.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ getent group ipetrov
+ipetrov:*:1896200004:
+[vagrant@ipa ~]$ getent group ppv
+ppv:*:1896200007:
+[vagrant@ipa ~]$ getent group lvas
+lvas:*:1896200006:
+[vagrant@ipa ~]$ getent group ipetrov
+ipetrov:*:1896200004:**
+</div></code></pre>
+<p>Проверим свойства пользователей через веб-консоль администратора.</p>
+<p><img src="resources/ipa_webadmin_users.png" alt="ipa-webadmin-users" title="Веб-интерфейс FreeIPA Сервера: Управление пользователями"></p>
+<p>Редактировать параметры пользователя можно, если кликнуть курсором мыши по имени пользователя.</p>
+<p><img src="resources/ipa_webamin_user_edit.png" alt="ipa-webadmin-users-edit" title="Веб-интерфейс FreeIPA Сервера: Редактирование параметров пользователя"></p>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D0%B0%D1%80%D0%BE%D0%BB%D1%8C%D0%BD%D1%8B%D1%85-%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA">Задача 2: Настройка парольных политик</h3>
+<p>Для начала посмотрим справку о парольных политиках, запустив команду</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa <span class="hljs-built_in">help</span> pwpolicy
+Password policy
+
+A password policy sets limitations on IPA passwords, including maximum
+lifetime, minimum lifetime, the number of passwords to save <span class="hljs-keyword">in</span>
+<span class="hljs-built_in">history</span>, the number of character classes required (<span class="hljs-keyword">for</span> stronger passwords)
+and the minimum password length.
+
+By default there is a single, global policy <span class="hljs-keyword">for</span> all users. You can also
+create a password policy to apply to a group. Each user is only subject
+to one password policy, either the group policy or the global policy. A
+group policy stands alone; it is not a super-set of the global policy plus
+custom settings.
+
+Each group password policy requires a unique priority setting. If a user
+is <span class="hljs-keyword">in</span> multiple groups that have password policies, this priority determines
+<span class="hljs-built_in">which</span> password policy is applied. A lower value indicates a higher priority
+policy.
+
+Group password policies are automatically removed when the groups they
+are associated with are removed.
+
+EXAMPLES:
+
+ Modify the global policy:
+   ipa pwpolicy-mod --minlength=10
+
+ Add a new group password policy:
+   ipa pwpolicy-add --maxlife=90 --minlife=1 --<span class="hljs-built_in">history</span>=10 --minclasses=3 --minlength=8 --priority=10 localadmins
+
+ Display the global password policy:
+   ipa pwpolicy-show
+
+ Display a group password policy:
+   ipa pwpolicy-show localadmins
+
+ Display the policy that would be applied to a given user:
+   ipa pwpolicy-show --user=tuser1
+
+ Modify a group password policy:
+   ipa pwpolicy-mod --minclasses=2 localadmins
+
+Topic commands:
+  pwpolicy-add   Add a new group password policy.
+  pwpolicy-del   Delete a group password policy.
+  pwpolicy-find  Search <span class="hljs-keyword">for</span> group password policies.
+  pwpolicy-mod   Modify a group password policy.
+  pwpolicy-show  Display information about password policy.
+
+To get <span class="hljs-built_in">command</span> <span class="hljs-built_in">help</span>, use:
+  ipa &lt;<span class="hljs-built_in">command</span>&gt; --<span class="hljs-built_in">help</span>
+
+[vagrant@ipa ~]$
+</div></code></pre>
+<p>Посмотрим текущие настройки политик по умолчанию</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa pwpolicy-show
+  Group: global_policy
+  Max lifetime (days): 90
+  Min lifetime (hours): 1
+  History size: 0
+  Character classes: 0
+  Min length: 8
+  Max failures: 6
+  Failure reset interval: 60
+  Lockout duration: 600
+</div></code></pre>
+<p>Изменим настройки глобальной политики, действующей по умолчанию на всех пользователей.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa pwpolicy-mod --maxlife=30 --minlength=4 --maxfail=3
+  Group: global_policy
+  Max lifetime (days): 30
+  Min lifetime (hours): 1
+  History size: 0
+  Character classes: 0
+  Min length: 4
+  Max failures: 3
+  Failure reset interval: 60
+  Lockout duration: 600
+</div></code></pre>
+<p>Справку по синтаксису подкоманды <code>ipa pwpolicy-mod</code> можно получить, есть вставить <code>help</code> между <code>ipa</code> и <code>pwpolicy-mod</code> или добавить параметр <code>--help</code>. Вот так</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa <span class="hljs-built_in">help</span> pwpolicy-mod
+...
+[vagrant@ipa ~]$ ipa pwpolicy-mod --<span class="hljs-built_in">help</span>
+...
+</div></code></pre>
+<p>Этот принцип получения встроенной справки работает и с другими подкомандами внутри <code>ipa</code>.</p>
+<p>Попробуем зайти в систему под заведенным пользователем с помощью подключения к <code>OpenSSH</code> серверу. Система утверждает, что у пользователя устарел пароль и сразу при входе просит его изменить. --Почему это так? Какой командой можно это узнать?--</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ssh ppv@localhost
+Password: &lt;Введите `password`&gt;
+Password expired. Change your password now. 
+Current Password: &lt;Введите `password`&gt;
+New password: &lt;Введите `password1`&gt;
+Retype new password: &lt;Введите `password1`&gt;
+Creating home directory <span class="hljs-keyword">for</span> ppv.
+[ppv@ipa ~]$ id
+uid=1896200007(ppv) gid=1896200007(ppv) groups=1896200007(ppv) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[ppv@ipa ~]$
+</div></code></pre>
+<p>Попробуем сразу сменить пароль пользователя на другой.</p>
+<pre class="hljs"><code><div>[ppv@ipa ~]$ ipa passwd
+Current Password: &lt;Введите `password1`&gt;
+New Password: &lt;Введите `password2`&gt;
+Enter New Password again to verify: &lt;Введите `password2`&gt;
+ipa: ERROR: Constraint violation: Too soon to change password
+</div></code></pre>
+<p>Почему у пользователя не получилось сразу сменить пароль на другой?
+На пользователя действует парольная политика по умолчанию. В ней указан минимальный срок жизни заданного пароля. Пользователь сможет повторить смену пароля только спустя 1 час после ранне произведенной успешной попытки.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa pwpolicy-show --all
+...
+  Min lifetime (hours): 1
+...
+</div></code></pre>
+<p>Теперь изменим парольную политику, задав её из под админа.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ipa pwpolicy-mod --minlife=0
+...
+  Min lifetime (hours): 0
+...
+</div></code></pre>
+<p>Попробуем ещё раз сменить пароль, зайдя под пользователем</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ssh ppv@localhost
+Password: &lt;Введите `password1`&gt;
+[ppv@ipa ~]$ ipa passwd
+Current Password:
+New Password:
+Enter New Password again to verify:
+--------------------------------------
+Changed password <span class="hljs-keyword">for</span> <span class="hljs-string">"ppv@EXAMPLE.COM"</span>
+--------------------------------------
+</div></code></pre>
+<p>Как вы видите, теперь пользователи могут менять свои пароли без ограничений по времени. Теперь им не нужно ждать 1 час после смены пароля, чтобы его изменить опять.</p>
+<p>Изменять свойства глобальной парольной политики можно также через веб-интерфейс.</p>
+<p><img src="resources/ipa_webamin_passwdpolicy_edit.png" alt="ipa-webadmin-passwdpolicy-edit" title="Веб-интерфейс FreeIPA Сервера: Редактирование глобальной парольной политики"></p>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-3-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-freeotp-%D0%BD%D0%B0-freeipa-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B5">Задача 3: Настройка FreeOTP на FreeIPA сервере</h3>
+<p>В компании требуется настроить двухфакторную аутентификацию для учетных записей системных администраторов и менеджеров.
+Двухфакторная аутентификация представляет собой технологию, обеспечивающую идентификацию пользователей с помощью комбинации двух различных компонентов. У пользователя в ходе проверки можно спросить не только его постоянный пользовательский пароль, но и его одноразовый пароль. Одноразовый пароль может быть выслан или сгенерирован с помощью приложения, установленного на мобильный телефон.</p>
+<p>В ходе этой практики мы будем использовать свободное и бесплатное мобильное приложение <a href="https://freeotp.github.io/" title="https://freeotp.github.io">FreeOTP</a>, в ходе практики вам потребуется установить  приложение <a href="https://itunes.apple.com/us/app/freeotp-authenticator/id872559395">FreeOTP Authentificator </a> из Apple AppStore, либо <a href="https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp">FreeOTP Authentificator</a> из Google Play на смартфон из вашего родного магазина приложений.
+FreeOTP использует свободные технологии и открытые протоколы <a href="http://www.ietf.org/rfc/rfc4226.txt">HMAC-Based One-Time Password Algorithm</a> и <a href="http://www.ietf.org/rfc/rfc6238.txt">Time-Based One-Time Password Algorithm</a> это значит, что вы можете использовать и другие программах многофакторной аутентификации, где реализованы эти протоколы. Например такие как <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">Google Authentificator</a> и <a href="https://play.google.com/store/apps/details?id=com.azure.authenticator">Microsoft Authentificator</a> и другие.</p>
+<p>Сводную таблицу о возможностях приложений для аутентификации можно найти по адресу <a href="https://en.wikipedia.org/wiki/Comparison_of_authentication_solutions">https://en.wikipedia.org/wiki/Comparison_of_authentication_solutions</a></p>
+<p>Выполнение этой практики не обязательно. Если вы не будете делать эту практику, это никак не повлияет на успешность дальнейших практик.</p>
+<h4 id="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B4%D0%B2%D1%83%D1%85%D1%84%D0%B0%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8-freeotp-%D0%BD%D0%B0-ipa-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B5">Настройка двухфакторной аутентификации FreeOTP на IPA сервере</h4>
+<p>Сначала мы разрешим однофакторную (парольную) и двухфакторную (парольную + OTP) типы аутентификации по умолчанию для всех пользователей с помощью веб-интерфейса. Допустимые типы аутентификации можно также задать при редактировании свойств пользователя, и на уровне групп пользователей.</p>
+<p><img src="resources/ipa_webadmin_enable_otp.png" alt="ipa-webadmin-enable-otp" title="Веб-интерфейс FreeIPA Сервера: Включение OTP"></p>
+<h4 id="%D1%80%D0%B5%D0%B3%D0%B8%D1%81%D1%82%D1%80%D0%B0%D1%86%D0%B8%D1%8F-otp-%D1%82%D0%BE%D0%BA%D0%B5%D0%BD%D0%B0-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%B2-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B8-freeotp-authentificator">Регистрация OTP токена безопасности в приложении <code>FreeOTP Authentificator</code></h4>
+<p>Теперь нужно сгенерировать <code>OTP Token</code> и привязать его к мобильному приложению пользователя с помощью QR кода.
+Нужно выйти из веб-интерфейса администратора и снова зайти, но уже под обычным пользователем.</p>
+<p><img src="resources/ipa_webadmin_add_userotp.png" alt="ipa-webadmin-add-userotp" title="Веб-интерфейс FreeIPA Сервера: Создание OTP Токена"></p>
+<p>Запустим приложение FreeOTP на смартфоне и с помощью фотокамеры смартфона сфотографируем QR код прямо с монитора.
+Не забудьте нажать кнопку <code>OK</code> в окне веб-интерфейса, чтобы добавить токен в систему.</p>
+<p><img src="resources/ipa_webadmin_otp_QR.png" alt="ipa-webadmin-add-userotp-qr" title="Веб-интерфейс FreeIPA Сервера: Создание OTP Токена. QR-код">
+Внимание! Не надо фотографировать приведенный для примера QR код со снимка экрана. Добавляйте только тот, что вы только что сгенерировали в веб-интерфейсе.</p>
+<p>Окно мобильного приложения <code>FreeOTP Authentificator</code> будет выглядеть примерно вот так.</p>
+<p><img src="resources/freeotp-android.png" alt="freeotp-android" title="FreeOTP Authentificator примерный вид экрана"></p>
+<p>Теперь пользователю для входа нужно будет указать либо только пароль, либо пароль и одноразовый код из приложения.</p>
+<h4 id="%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B0-%D0%B2%D1%85%D0%BE%D0%B4%D0%B0-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-%D0%BE%D0%B4%D0%BD%D0%BE%D1%80%D0%B0%D0%B7%D0%BE%D0%B2%D0%BE%D0%B3%D0%BE-%D0%BF%D0%B0%D1%80%D0%BE%D0%BB%D1%8F">Проверка входа с помощью одноразового пароля</h4>
+<p>Попробуем зайти под IPA пользователем с помощью <code>OpenSSH</code> сервера</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ ssh ppv@localhost
+First Factor: &lt;введите пароль&gt;
+Second Factor (optional): &lt;Введите OTP пароль со смартфона&gt;
+Last login: Thu Sep  6 18:46:01 2018 from ::1
+[ppv@ipa ~]$ id
+uid=1896200007(ppv) gid=1896200007(ppv) groups=1896200007(ppv) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[ppv@ipa ~]$
+</div></code></pre>
+<p>С помощью OTP пин кода можно также зайти на веб-интерфейс администратора IPA сервера.
+<img src="resources/ipa_webadmin_logonwith_otp.png" alt="ipa-webadmin-logonwith-otp" title="Веб-интерфейс FreeIPA Сервера: Вход с помощью пароля и одноразового пин кода">
+В нашем примере разрешены проверки при входе с помощью только пароля, а также с помощью &quot;<code>пароль</code>+ <code>OTP пин код</code>&quot;. Например, если пароль равен <code>password</code>, а OTP пин код в данный момент равен <code>543234</code>, то войти можно, указав в поле пароля как  <code>password</code>, так и <code>password543234</code>.</p>
+<p>Вопрос: Где и какими инструментаами можно изменить допустимые типы аутентификации для пользователя?</p>
+<p><a href="#top">Back to top</a></p>
+<h2 id="%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-3-%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%BE%D0%B2-%D0%B8-%D1%80%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D1%85-%D1%81%D1%82%D0%B0%D0%BD%D1%86%D0%B8%D0%B9-%D0%BA-freeipa-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D1%83">Упражнение 3: Подключение серверов и рабочих станций к FreeIPA домену</h2>
+<p>Подключим к домену сервер <code>srv.example.com</code> и рабочую станцию <code>cl.example.com</code>. На сервере настроим Samba и NFS сервера со входом по <code>Kerberos</code>. Зайдём на рабочую станцию под IPA пользоватекем и проверим доступ.</p>
+<ol>
+<li>Подключение к домену. Установка и настройка пакетов</li>
+<li>Установка Samba, NFS и Веб серверов</li>
+<li>Проверка доступа со стороны клиента</li>
+</ol>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1-%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BA-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D1%83-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2">Задача 1: Подключение к домену. Установка и настройка пакетов</h3>
+<p>Выполните вход в систему на виртуальной машине <code>srv.example.com</code>, используя учетную запись <code>vagrant</code> и пароль <code>vagrant</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Машина</th>
+<th>Протокол, доступ и имя пользователя</th>
+<th>Пароль</th>
+<th style="text-align:center">IP адрес</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>srv.example.com</code></td>
+<td><code>ssh vagrant@srv.example.com</code></td>
+<td>vagrant</td>
+<td style="text-align:center">172.25.0.11</td>
+</tr>
+<tr>
+<td><code>ipa.example.com</code></td>
+<td><code>ssh vagrant@ipa.example.com</code></td>
+<td>vagrant</td>
+<td style="text-align:center">172.25.0.10</td>
+</tr>
+</tbody>
+</table>
+<p>Перед подключением машин к FreeIPA домену проверим, правильно ли разрешаются имена DNS домена <code>example.com</code>.</p>
+<p>Проделайте действия на: srv.example.com</p>
+<ul>
+<li>
+<p>Зайдите интерактивно в среду рабочего стола &quot;Gnome Enviroment&quot;с логином <code>vagrant</code> и паролем <code>vagrant</code>.</p>
+</li>
+<li>
+<p>Ответьте по умолчанию на вопросы мастера начальной настройки &quot;Gnome Enviroment&quot;.</p>
+</li>
+<li>
+<p>Настройте разрешение имен dns через ipa сервер <code>ipa.example.com</code></p>
+</li>
+</ul>
+<p>Запустите &quot;Gnome Terminal&quot; и дайте команды</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ sudo nmcli conn modify System\ eth0 ipv4.ignore-auto-dns <span class="hljs-literal">true</span>
+[vagrant@srv ~]$ sudo nmcli conn up System\ eth0
+
+[vagrant@srv ~]$ sudo nmcli conn modify System\ eth1 ipv4.dns 172.25.0.10
+[vagrant@srv ~]$ sudo ifdown eth1; sudo ifup eth1
+</div></code></pre>
+<p>Убедитесь, что файл /etc/resolv.conf теперь содержит такие строки.</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ cat /etc/resolv.conf
+</div></code></pre>
+<pre class="hljs"><code><div># Generated by NetworkManager
+search example.com
+nameserver 172.25.0.10
+</div></code></pre>
+<p>Проверим, что имя сервера <code>ipa.example.com</code> теперь разрешается со стороны клиента.</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ getent hosts ipa.example.com
+172.25.0.10     ipa.example.com
+</div></code></pre>
+<p>Поставим необходимые пакеты, для подключения в FreeIPA домену.</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ sudo yum install -y ipa-client realmd
+</div></code></pre>
+<p>Утилитой <code>realm</code> из пакета <code>realmd</code> проверим , что FreeIPA сервер <code>ipa.example.com</code> доступен для подключения.</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ realm discover -v example.com
+ * Resolving: _ldap._tcp.example.com
+ * Performing LDAP DSE lookup on: 172.25.0.10
+ * Successfully discovered: example.com
+example.com
+  <span class="hljs-built_in">type</span>: kerberos
+  realm-name: EXAMPLE.COM
+  domain-name: example.com
+  configured: no
+  server-software: ipa
+  client-software: sssd
+  required-package: ipa-client
+  required-package: oddjob
+  required-package: oddjob-mkhomedir
+  required-package: sssd
+</div></code></pre>
+<p>Присоединим компьютер к FreeIPA домену</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ sudo ipa-client-install    --mkhomedir \
+                                            --<span class="hljs-built_in">enable</span>-dns-updates \
+                                            --ssh-trust-dns \
+                                            --server=ipa.example.com \
+                                            --domain=example.com \
+                                            -p admin -w password \
+                                            --fixed-primary -U \
+                                            --force-ntpd
+
+Client hostname: srv.example.com
+Realm: EXAMPLE.COM
+DNS Domain: example.com
+IPA Server: ipa.example.com
+BaseDN: dc=example,dc=com
+
+Synchronizing time with KDC...
+Attempting to sync time using ntpd.  Will timeout after 15 seconds
+Successfully retrieved CA cert
+    Subject:     CN=Certificate Authority,O=EXAMPLE.COM
+    Issuer:      CN=Certificate Authority,O=EXAMPLE.COM
+    Valid From:  2018-09-05 12:10:24
+    Valid Until: 2038-09-05 12:10:24
+
+Enrolled <span class="hljs-keyword">in</span> IPA realm EXAMPLE.COM
+Created /etc/ipa/default.conf
+New SSSD config will be created
+Configured sudoers <span class="hljs-keyword">in</span> /etc/nsswitch.conf
+Configured /etc/sssd/sssd.conf
+Configured /etc/krb5.conf <span class="hljs-keyword">for</span> IPA realm EXAMPLE.COM
+trying https://ipa.example.com/ipa/json
+[try 1]: Forwarding <span class="hljs-string">'schema'</span> to json server <span class="hljs-string">'https://ipa.example.com/ipa/json'</span>
+trying https://ipa.example.com/ipa/session/json
+[try 1]: Forwarding <span class="hljs-string">'ping'</span> to json server <span class="hljs-string">'https://ipa.example.com/ipa/session/json'</span>
+[try 1]: Forwarding <span class="hljs-string">'ca_is_enabled'</span> to json server <span class="hljs-string">'https://ipa.example.com/ipa/session/json'</span>
+Systemwide CA database updated.
+Adding SSH public key from /etc/ssh/ssh_host_rsa_key.pub
+Adding SSH public key from /etc/ssh/ssh_host_ecdsa_key.pub
+Adding SSH public key from /etc/ssh/ssh_host_ed25519_key.pub
+[try 1]: Forwarding <span class="hljs-string">'host_mod'</span> to json server <span class="hljs-string">'https://ipa.example.com/ipa/session/json'</span>
+SSSD enabled
+Configured /etc/openldap/ldap.conf
+NTP enabled
+Configured /etc/ssh/ssh_config
+Configured /etc/ssh/sshd_config
+Configuring example.com as NIS domain.
+Client configuration complete.
+The ipa-client-install <span class="hljs-built_in">command</span> was successful
+[vagrant@srv ~]$
+</div></code></pre>
+<p>Справку по параметрам <code>ipa-client-install</code> можно получить с помощью <code>man ipa-client-install</code>.</p>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-samba-nfs-%D0%B8-http-apache-%D1%81%D0%B5%D1%80%D0%B2%D0%B8%D1%81%D0%BE%D0%B2-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D1%81-ipa">Задача 2. Установка настройка Samba, NFS и HTTP Apache сервисов, интегрированных с IPA</h3>
+<h4 id="%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-spn-%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B5%D0%B9-%D0%B3%D0%B5%D0%BD%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F-keytab-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2">Установка пакетов, создание SPN-записей, генерация keytab-файлов</h4>
+<p>Поставим пакеты.</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ sudo yum install   nfs-utils nfs-secure \
+                                    samba samba-client sssd-libwbclient ipa-server-trust-ad \
+                                    httpd mod_nss mod_wsgi mod_ssl mod_auth_kerb ipa-admintools
+</div></code></pre>
+<p>Создадим <code>SPN-записи</code> сервисов для NFS, SMB, HTTP серверов.
+Получим права администратора IPA домена с помощью <code>Kerberos</code> билета пользователя <code>admin</code>.</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ sudo -s
+[root@srv ~]<span class="hljs-comment"># kinit admin</span>
+Password <span class="hljs-keyword">for</span> admin@EXAMPLE.COM: &lt; <span class="hljs-string">"password"</span> &gt;
+[root@srv <span class="hljs-comment">#]$ klist</span>
+Ticket cache: KEYRING:persistent:1000:1000
+Default principal: admin@EXAMPLE.COM
+
+Valid starting       Expires              Service principal
+09/10/2018 20:17:51  09/11/2018 20:14:40  HTTP/ipa.example.com@EXAMPLE.COM
+09/10/2018 20:14:54  09/11/2018 20:14:40  ldap/ipa.example.com@EXAMPLE.COM
+09/10/2018 20:14:42  09/11/2018 20:14:40  krbtgt/EXAMPLE.COM@EXAMPLE.COM
+</div></code></pre>
+<p>Создадим SPN-записи сервисов для NFS, SMB, HTTP.</p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># ipa service-add nfs/srv.example.com</span>
+-----------------------------------------------
+Added service <span class="hljs-string">"nfs/srv.example.com@EXAMPLE.COM"</span>
+-----------------------------------------------
+  Principal name: nfs/srv.example.com@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: nfs/srv.example.com@EXAMPLE.COM
+  Managed by: srv.example.com
+
+[root@srv ~]<span class="hljs-comment"># ipa service-add cifs/srv.example.com</span>
+-----------------------------------------------
+Added service <span class="hljs-string">"cifs/srv.example.com@EXAMPLE.COM"</span>
+-----------------------------------------------
+  Principal name: cifs/srv.example.com@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: cifs/srv.example.com@EXAMPLE.COM
+  Managed by: srv.example.com
+</div></code></pre>
+<p>Запросим <code>keytab</code>-файлы для сервисов <code>NFS Server</code>, <code>Samba Server</code> и <code>HTTP Apache Server</code> и сохраним информацию в <code>/etc/krb5.keytab</code>. Проверим, что SPN-записи сохранились и права доступа установлены в <code>0700</code>.</p>
+<pre class="hljs"><code><div>[root@srv vagrant]<span class="hljs-comment"># ipa-getkeytab -p nfs/srv.example.com -k /etc/krb5.keytab -s ipa.example.com</span>
+Keytab successfully retrieved and stored <span class="hljs-keyword">in</span>: /etc/krb5.keytab
+
+[root@srv vagrant]<span class="hljs-comment"># ipa-getkeytab -p cifs/srv.example.com -k /etc/samba/samba.keytab -s ipa.example.com</span>
+Keytab successfully retrieved and stored <span class="hljs-keyword">in</span>: /etc/samba/samba.keytab
+
+[root@srv vagrant]<span class="hljs-comment"># ipa-getkeytab -p http/srv.example.com -k /etc/krb5.keytab -s ipa.example.com</span>
+Keytab successfully retrieved and stored <span class="hljs-keyword">in</span>: /etc/krb5.keytab
+
+[root@srv vagrant]<span class="hljs-comment"># klist -kte /etc/krb5.keytab</span>
+Keytab name: FILE:/etc/krb5.keytab
+KVNO Timestamp           Principal
+---- ------------------- ------------------------------------------------------
+   3 09/10/2018 21:04:53 nfs/srv.example.com@EXAMPLE.COM (aes256-cts-hmac-sha1-96)
+   3 09/10/2018 21:04:53 nfs/srv.example.com@EXAMPLE.COM (aes128-cts-hmac-sha1-96)
+   1 09/10/2018 21:23:15 nfs/srv.example.com@EXAMPLE.COM (aes256-cts-hmac-sha1-96)
+   1 09/10/2018 21:23:15 nfs/srv.example.com@EXAMPLE.COM (aes128-cts-hmac-sha1-96)
+   1 09/10/2018 21:23:22 http/srv.example.com@EXAMPLE.COM (aes256-cts-hmac-sha1-96)
+   1 09/10/2018 21:23:22 http/srv.example.com@EXAMPLE.COM (aes128-cts-hmac-sha1-96)
+   2 09/10/2018 21:25:55 host/srv.example.com@EXAMPLE.COM (aes256-cts-hmac-sha1-96)
+   2 09/10/2018 21:25:55 host/srv.example.com@EXAMPLE.COM (aes128-cts-hmac-sha1-96)
+[root@srv vagrant]<span class="hljs-comment"># ls -al /etc/krb5.keytab</span>
+-rw-------. 1 root root 828 Sep 10 21:25 /etc/krb5.keytab
+</div></code></pre>
+<h4 id="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-nfs-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0-%D1%81-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%BE%D0%B9-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8-kerberos-%D0%B8-autofs-kerberized-nfs-server">Настройка NFS сервера с поддержкой аутентификации Kerberos и autofs (&quot;Kerberized NFS Server&quot;)</h4>
+<p>Включим поддержку <code>Kerberos</code> на NFS сервере, экспортируем каталог <code>/export</code> для nfs клиентов.</p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># ipa-client-automount -U</span>
+Searching <span class="hljs-keyword">for</span> IPA server...
+IPA server: DNS discovery
+Location: default
+Configured /etc/sysconfig/nfs
+Configured /etc/idmapd.conf
+Started rpcidmapd
+Started rpcgssd
+Restarting sssd, waiting <span class="hljs-keyword">for</span> it to become available.
+Started autofs
+[root@srv vagrant]<span class="hljs-comment"># cat /etc/sysconfig/nfs |grep SECURE</span>
+SECURE_NFS=yes
+[root@srv vagrant]<span class="hljs-comment"># cat /etc/idmapd.conf |grep "Domain = example.com"</span>
+Domain = example.com
+
+[root@srv vagrant]<span class="hljs-comment"># mkdir /export</span>
+[root@srv vagrant<span class="hljs-comment"># cd</span>
+[root@srv ~]<span class="hljs-comment"># cp /root/anaconda-ks.cfg /export</span>
+[root@srv ~]<span class="hljs-comment"># echo '/export *(rw,sec=krb5:krb5i:krb5p)' &gt;&gt; /etc/exports</span>
+[root@srv ~]<span class="hljs-comment"># mkdir /home/ipahomes</span>
+[root@srv ~]<span class="hljs-comment"># echo '/home/ipahomes  *(rw,sec=sys:krb5:krb5i:krb5p)' &gt;&gt; /etc/exports</span>
+[root@srv ~]<span class="hljs-comment"># cat /etc/exports</span>
+/<span class="hljs-built_in">export</span> *(rw,sec=krb5:krb5i:krb5p)
+/home/ipahomes  *(rw,sec=sys:krb5:krb5i:krb5p)
+[root@srv ~]<span class="hljs-comment"># systemctl enable nfs.service</span>
+[root@srv ~]<span class="hljs-comment"># systemctl restart nfs.service</span>
+[root@srv ~]<span class="hljs-comment"># systemctl restart nfs-server.service</span>
+[root@srv ~]<span class="hljs-comment"># systemctl enable nfs-secure.service</span>
+[root@srv ~]<span class="hljs-comment"># systemctl restart nfs-secure.service</span>
+[root@srv ~]<span class="hljs-comment"># systemctl restart nfs-secure-server.service</span>
+</div></code></pre>
+<p>Откроем необходимые для сервера порты в <code>Firewalld</code></p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># firewall-cmd --add-service=nfs --permanent</span>
+success
+[root@srv ~]<span class="hljs-comment"># firewall-cmd --reload</span>
+success
+</div></code></pre>
+<p>Пропишем в IPA домене настройки для автоматического монтирования домашнего каталога <code>/home/ipahomes</code> с NFS сервера  с помощью демона <code>autofs</code>.</p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># ipa automountmap-add default auto.ipahomes</span>
+[root@srv ~]<span class="hljs-comment"># ipa automountkey-add default --key "/home/ipahomes" --info auto.ipahomes auto.master</span>
+[root@srv ~]<span class="hljs-comment"># ipa automountkey-add default  --key "*" \</span>
+                                            --info <span class="hljs-string">"-fstype=nfs4,rw,sec=krb5,soft,rsize=8192,wsize=8192 \
+                                            srv.example.com:/home/ipahomes/&amp;"</span> auto.ipahomes
+[root@srv ~]<span class="hljs-comment"># ipa automountlocation-tofiles</span>
+Location: default
+/etc/auto.master:
+/-      /etc/auto.direct
+/home/ipahomes  /etc/auto.ipahomes
+---------------------------
+/etc/auto.direct:
+---------------------------
+/etc/auto.ipahomes:
+*       -fstype=nfs4,rw,sec=krb5,soft,rsize=8192,wsize=8192 srv.example.com:/home/ipahomes/&amp;
+
+maps not connected to /etc/auto.master:
+</div></code></pre>
+<p>Настроим пользователю <code>ipetrov</code> домашний каталог внутри <code>/home/ipahomes/</code>.</p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># ipa user-mod ipetrov --homedir='/home/ipahomes'</span>
+-----------------------
+Modified user <span class="hljs-string">"ipetrov"</span>
+-----------------------
+  User login: ipetrov
+  First name: Ivan
+  Last name: Petrov
+  Home directory: /home/ipahomes
+  Login shell: /bin/bash
+  Principal name: ipetrov@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: ipetrov@EXAMPLE.COM
+  Email address: ipetrov@example.com
+  UID: 1896200004
+  GID: 1896200004
+  Account disabled: False
+  Password: True
+  Member of groups: ipausers
+  Kerberos keys available: True
+</div></code></pre>
+<p>Настроим клиентский компьютер как NFS клиент получающий настройки <code>autofs</code> из каталога и поддержкой <code>Kerberos</code>.</p>
+<pre class="hljs"><code><div>[vagrant@cl1 ~]$ sudo -s
+[root@cl vagrant]<span class="hljs-comment"># su -</span>
+[root@cl ~]<span class="hljs-comment"># kinit admin</span>
+Password <span class="hljs-keyword">for</span> admin@EXAMPLE.COM: &lt; <span class="hljs-string">"password"</span> &gt;
+[root@cl ~]<span class="hljs-comment"># ipa-client-automount -U</span>
+Searching <span class="hljs-keyword">for</span> IPA server...
+IPA server: DNS discovery
+Location: default
+Configured /etc/sysconfig/nfs
+Configured /etc/idmapd.conf
+Started rpcidmapd
+Started rpcgssd
+Restarting sssd, waiting <span class="hljs-keyword">for</span> it to become available.
+Started autofs
+[root@cl ~]<span class="hljs-comment"># cat /etc/sysconfig/nfs |grep SECURE</span>
+SECURE_NFS=yes
+[root@cl ~]<span class="hljs-comment"># cat /etc/idmapd.conf |grep "Domain = example.com"</span>
+Domain = example.com
+
+[root@cl ~]<span class="hljs-comment"># systemctl start rpc-gssd.service</span>
+[root@cl ~]<span class="hljs-comment"># systemctl start rpcbind.service</span>
+[root@cl ~]<span class="hljs-comment"># systemctl start nfs-idmapd.service</span>
+[root@cl ~]<span class="hljs-comment"># systemctl enable rpc-gssd.service</span>
+[root@cl ~]<span class="hljs-comment"># systemctl enable rpcbind.service</span>
+[root@cl ~]<span class="hljs-comment"># systemctl enable nfs-idmapd.service</span>
+
+</div></code></pre>
+<p>Добавим монтирование каталога <code>/mnt/export</code> с сервера <code>srv.example.com</code> при старте.</p>
+<pre class="hljs"><code><div>[root@cl ~]<span class="hljs-comment"># echo "srv.example.com:/export /mnt/export nfs4 sec=krb5i,rw,proto=tcp,port=2049"  &gt;&gt;/etc/fstab</span>
+
+[root@cl ~]<span class="hljs-comment"># mount -av</span>
+/                        : ignored
+/boot                    : already mounted
+swap                     : ignored
+mount.nfs4: timeout <span class="hljs-built_in">set</span> <span class="hljs-keyword">for</span> Mon Sep 10 22:19:39 2018
+mount.nfs4: trying text-based options <span class="hljs-string">'sec=krb5i,proto=tcp,port=2049,vers=4.1,addr=172.25.0.11,clientaddr=172.25.0.20'</span>
+/mnt/<span class="hljs-built_in">export</span>              : successfully mounted
+[root@cl ~]<span class="hljs-comment"># mount |grep export</span>
+srv.example.com:/<span class="hljs-built_in">export</span> on /mnt/<span class="hljs-built_in">export</span> <span class="hljs-built_in">type</span> nfs4 (rw,relatime,vers=4.1,rsize=131072,wsize=131072,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=krb5i,clientaddr=172.25.0.20,local_lock=none,addr=172.25.0.11)
+</div></code></pre>
+<p>Настроим SSSD так, чтобы <code>PAM</code> модуль автоматически создавал домашние каталоги пользователей при входе, а домашний каталог <code>/home/ipahomes/ipetrov</code> для пользователя <code>ipetrov</code> автоматически монтировался с NFS сервера, а также автоматически обновлялись <code>Kerberos</code> билеты.</p>
+<pre class="hljs"><code><div>[root@cl ~]<span class="hljs-comment"># authconfig --update --enablesssd --enablesssdauth --enablemkhomedir</span>
+[root@cl ~]<span class="hljs-comment"># systemctl restart sshd.service</span>
+[root@cl ~]<span class="hljs-comment"># vim /etc/sssd/sssd.conf</span>
+
+[domain/EXAMPLE.COM]
+cache_credentials = True
+krb5_store_password_if_offline = True
+ipa_domain = example.com
+id_provider = ipa
+auth_provider = ipa
+...
+krb5_renewable_lifetime = 50d
+krb5_renew_interval = 3600
+
+
+[root@cl ~]<span class="hljs-comment"># ssh ipetrov@cl1.example.com</span>
+Password:
+Password:
+Last failed login: Tue Sep 11 00:22:24 +07 2018 from 127.0.0.1 on ssh:notty
+There was 1 failed login attempt since the last successful login.
+Last login: Tue Sep 11 00:09:49 2018 from 127.0.0.1
+[ipetrov@cl ~]$ <span class="hljs-built_in">pwd</span>
+/home/ipahomes/ipetrov
+[ipetrov@cl ~]$ ls -al
+total 16
+drwx------. 4 ipetrov ipetrov 128 Sep 10 23:59 .
+drwxr-xr-x. 3 root    root      0 Sep 11 00:22 ..
+-rw-------. 1 ipetrov ipetrov 146 Sep 11 00:10 .bash_history
+-rw-------. 1 ipetrov ipetrov  18 Sep 10 23:17 .bash_logout
+-rw-------. 1 ipetrov ipetrov 193 Sep 10 23:17 .bash_profile
+-rw-------. 1 ipetrov ipetrov 231 Sep 10 23:17 .bashrc
+drwxrwxr-x. 3 ipetrov ipetrov  18 Sep 10 23:59 .cache
+drwxrwxr-x. 3 ipetrov ipetrov  18 Sep 10 23:59 .config
+-rw-rw-r--. 1 ipetrov ipetrov   0 Sep 10 23:59 file.txt
+[ipetrov@cl ~]$ <span class="hljs-built_in">pwd</span>
+/home/ipahomes/ipetrov
+[ipetrov@cl ~]$ id
+uid=1896200004(ipetrov) gid=1896200004(ipetrov) groups=1896200004(ipetrov) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+[ipetrov@cl ~]$ mount |grep nfs4
+srv.example.com:/<span class="hljs-built_in">export</span> on /mnt/<span class="hljs-built_in">export</span> <span class="hljs-built_in">type</span> nfs4 (rw,relatime,vers=4.1,rsize=131072,wsize=131072,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=krb5i,clientaddr=172.25.0.20,local_lock=none,addr=172.25.0.11)
+srv.example.com:/home/ipahomes/ipetrov on /home/ipahomes/ipetrov <span class="hljs-built_in">type</span> nfs4 (rw,relatime,vers=4.1,rsize=8192,wsize=8192,namlen=255,soft,proto=tcp,port=0,timeo=600,retrans=2,sec=krb5,clientaddr=172.25.0.20,local_lock=none,addr=172.25.0.11)
+[ipetrov@cl ~]$ ls -al /mnt/<span class="hljs-built_in">export</span>/
+total 8
+drwxr-xr-x. 2 root root   29 Sep 10 21:43 .
+drwxr-xr-x. 3 root root   20 Sep 10 22:16 ..
+-rw-r--r--. 1 root root 5763 Sep 10 21:43 anaconda-ks.cfg
+[ipetrov@cl ~]$ <span class="hljs-built_in">logout</span>
+</div></code></pre>
+<p>Проверим, что локальный пользователь без <code>Kerberos</code> билета внутри домена не может получить доступ к каталогу <code>/mnt/exports</code></p>
+<pre class="hljs"><code><div>[vagrant@cl ~]$ kdestroy
+[vagrant@cl ~]$ klist
+klist: Credentials cache keyring <span class="hljs-string">'persistent:1000:1000'</span> not found
+[vagrant@cl ~]$ ls - al /mnt/<span class="hljs-built_in">export</span>
+ls: cannot access /mnt/<span class="hljs-built_in">export</span>: Permission denied
+[vagrant@cl ~]$ cat /mnt/<span class="hljs-built_in">export</span>/anaconda-ks.cfg
+cat: /mnt/<span class="hljs-built_in">export</span>/anaconda-ks.cfg: Permission denied
+</div></code></pre>
+<p>IPA пользователь при входе получает <code>Kerberos</code> билет домена <code>example.com</code> и получает доступ к экспортированному NFS каталогу с сервера, требующего <code>Kerberos</code> аутентификацию.</p>
+<pre class="hljs"><code><div>[root@cl ~]<span class="hljs-comment"># ssh ppv@cl.example.com</span>
+Password: &lt; password &gt;
+Creating home directory <span class="hljs-keyword">for</span> ppv.
+[ppv@cl ~]$ klist
+Ticket cache: KEYRING:persistent:1896200007:krb_ccache_PmD4WDn
+Default principal: ppv@EXAMPLE.COM
+
+Valid starting       Expires              Service principal
+09/10/2018 17:56:48  09/11/2018 17:56:48  krbtgt/EXAMPLE.COM@EXAMPLE.COM
+
+[ppv@cl ~]$ ls -al /mnt/<span class="hljs-built_in">export</span>/
+total 8
+drwxr-xr-x. 2 root root   29 Sep 10 21:43 .
+drwxr-xr-x. 3 root root   20 Sep 10 22:16 ..
+-rw-r--r--. 1 root root 5763 Sep 10 21:43 anaconda-ks.cfg
+[ppv@cl1 ~]$ less /mnt/<span class="hljs-built_in">export</span>/anaconda-ks.cfg
+....
+
+</div></code></pre>
+<h4 id="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-openssh-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0-%D1%81-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%BE%D0%B9-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B8-kerberos">Настройка OpenSSH сервера с поддержкой аутентификации Kerberos</h4>
+<p>Поддержка <code>Kerberos</code> включается ватоматически на компьютерах, включенных в IPA домен для пользователей, ранее уже прошедших проверку. Проверим беспарольный <code>OpenSSH</code> доступ на компьютеры домена, иcпользуя <code>Kerberos</code> и ранее выданный билет.</p>
+<pre class="hljs"><code><div>[ppv@cl ~]$ ssh ppv@srv.example.com  
+Last login: Mon Sep 10 17:56:39 2018 from 127.0.0.1
+[ppv@srv ~]$ <span class="hljs-built_in">logout</span>
+Connection to srv.example.com closed.
+[ppv@cl ~]$ ssh ppv@cl.example.com
+Last login: Mon Sep 10 17:56:56 2018 from 127.0.0.1
+[ppv@cl ~]$ <span class="hljs-built_in">logout</span>
+Connection to srv.example.com closed.
+[ppv@cl ~]$ ssh ppv@ipa.example.com
+Last login: Mon Sep 10 17:56:56 2018 from 127.0.0.1
+[ppv@ipa ~]$
+</div></code></pre>
+<p>Так как теперь при <code>OpenSSH</code> входе для проверки используется <code>Kerberos</code> билет, паролей при входе вводить не нужно.</p>
+<h4 id="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-samba-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0-%D1%81-sssd-%D0%B8-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B5%D0%B9-ipa">Настройка Samba сервера с sssd и аутентификацией IPA</h4>
+<p>Предварительно подготовим IPA сервер</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># yum -y install ipa-server-trust-ad</span>
+...
+[root@ipa vagrant]<span class="hljs-comment"># ipa-adtrust-install --add-sids</span>
+
+The <span class="hljs-built_in">log</span> file <span class="hljs-keyword">for</span> this installation can be found <span class="hljs-keyword">in</span> /var/<span class="hljs-built_in">log</span>/ipaserver-install.log
+==============================================================================
+This program will setup components needed to establish trust to AD domains <span class="hljs-keyword">for</span>
+the IPA Server.
+
+This includes:
+  * Configure Samba
+  * Add trust related objects to IPA LDAP server
+
+To accept the default shown <span class="hljs-keyword">in</span> brackets, press the Enter key.
+
+Configuring cross-realm trusts <span class="hljs-keyword">for</span> IPA server requires password <span class="hljs-keyword">for</span> user <span class="hljs-string">'admin'</span>.
+This user is a regular system account used <span class="hljs-keyword">for</span> IPA server administration.
+
+admin password:
+
+IPA generated smb.conf detected.
+Overwrite smb.conf? [no]: yes
+Do you want to <span class="hljs-built_in">enable</span> support <span class="hljs-keyword">for</span> trusted domains <span class="hljs-keyword">in</span> Schema Compatibility plugin?
+This will allow clients older than SSSD 1.9 and non-Linux clients to work with trusted users.
+
+Enable trusted domains support <span class="hljs-keyword">in</span> slapi-nis? [no]:
+
+
+The following operations may take some minutes to complete.
+Please <span class="hljs-built_in">wait</span> until the prompt is returned.
+
+Configuring CIFS
+  [1/23]: validate server hostname
+  [2/23]: stopping smbd
+  [3/23]: creating samba domain object
+Samba domain object already exists
+  [4/23]: creating samba config registry
+  [5/23]: writing samba config file
+  [6/23]: adding cifs Kerberos principal
+  [7/23]: adding cifs and host Kerberos principals to the adtrust agents group
+  [8/23]: check <span class="hljs-keyword">for</span> cifs services defined on other replicas
+  [9/23]: adding cifs principal to S4U2Proxy targets
+cifs principal already targeted, nothing to <span class="hljs-keyword">do</span>.
+  [10/23]: adding admin(group) SIDs
+Admin SID already <span class="hljs-built_in">set</span>, nothing to <span class="hljs-keyword">do</span>
+Admin group SID already <span class="hljs-built_in">set</span>, nothing to <span class="hljs-keyword">do</span>
+  [11/23]: adding RID bases
+RID bases already <span class="hljs-built_in">set</span>, nothing to <span class="hljs-keyword">do</span>
+  [12/23]: updating Kerberos config
+<span class="hljs-string">'dns_lookup_kdc'</span> already <span class="hljs-built_in">set</span> to <span class="hljs-string">'true'</span>, nothing to <span class="hljs-keyword">do</span>.
+  [13/23]: activating CLDAP plugin
+CLDAP plugin already configured, nothing to <span class="hljs-keyword">do</span>
+  [14/23]: activating sidgen task
+Sidgen task plugin already configured, nothing to <span class="hljs-keyword">do</span>
+  [15/23]: configuring smbd to start on boot
+  [16/23]: adding special DNS service records
+  [17/23]: restarting Directory Server to take MS PAC and LDAP plugins changes into account
+  [18/23]: adding fallback group
+Fallback group already <span class="hljs-built_in">set</span>, nothing to <span class="hljs-keyword">do</span>
+  [19/23]: adding Default Trust View
+Default Trust View already exists.
+  [20/23]: setting SELinux booleans
+  [21/23]: starting CIFS services
+  [22/23]: adding SIDs to existing users and groups
+This step may take considerable amount of time, please <span class="hljs-built_in">wait</span>..
+  [23/23]: restarting smbd
+Done configuring CIFS.
+
+=============================================================================
+Setup complete
+
+You must make sure these network ports are open:
+        TCP Ports:
+          * 135: epmap
+          * 138: netbios-dgm
+          * 139: netbios-ssn
+          * 445: microsoft-ds
+          * 1024..1300: epmap listener range
+          * 3268: msft-gc
+        UDP Ports:
+          * 138: netbios-dgm
+          * 139: netbios-ssn
+          * 389: (C)LDAP
+          * 445: microsoft-ds
+
+See the ipa-adtrust-install(1) man page <span class="hljs-keyword">for</span> more details
+
+=============================================================================
+
+[root@ipa vagrant]<span class="hljs-comment">#</span>
+</div></code></pre>
+<p>Мастер adtrust добавил новые аттрибуты  ( ipaNTSecurityIdentifier (the SID), ipaNTHash ) для каждого пользователя и группы. К сожалению, чтобы записался аттрибут ipaNTHash, также необходимый для Samba, пароль пользователя должен быть изменен либо сброшен.</p>
+<p>Сбросим пароль пользователя <code>ppv</code></p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># ipa passwd ppv</span>
+</div></code></pre>
+<p>Поставим на SAMBA сервер пакет <code>ipa-server-trust-ad</code> и некоторые другие пакеты.</p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># yum -y install ipa-server-trust-ad openldap-clients policycoreutils-python</span>
+</div></code></pre>
+<p>Откроем необходимые для SAMBA сервера порты в <code>Firewalld</code></p>
+<pre class="hljs"><code><div>tf=/lib/firewalld/services/freeipa-samba.xml
+touch <span class="hljs-string">"<span class="hljs-variable">${tf}</span>"</span>; chmod 0644 <span class="hljs-string">"<span class="hljs-variable">${tf}</span>"</span>; chown root:root <span class="hljs-string">"<span class="hljs-variable">${tf}</span>"</span>; restorecon <span class="hljs-string">"<span class="hljs-variable">${tf}</span>"</span>
+cat &lt;&lt;EOFXML &gt; <span class="hljs-string">"<span class="hljs-variable">${tf}</span>"</span>
+&lt;?xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"utf-8"</span>?&gt;
+&lt;service&gt;
+  &lt;short&gt;IPA and Samba&lt;/short&gt;
+  &lt;description&gt;This service provides the ports required by the ipa-adtrust-install <span class="hljs-built_in">command</span>.&lt;/description&gt;
+  &lt;port protocol=<span class="hljs-string">"tcp"</span> port=<span class="hljs-string">"135"</span>/&gt;
+  &lt;port protocol=<span class="hljs-string">"tcp"</span> port=<span class="hljs-string">"138"</span>/&gt;
+  &lt;port protocol=<span class="hljs-string">"tcp"</span> port=<span class="hljs-string">"139"</span>/&gt;
+  &lt;port protocol=<span class="hljs-string">"tcp"</span> port=<span class="hljs-string">"445"</span>/&gt;
+  &lt;port protocol=<span class="hljs-string">"tcp"</span> port=<span class="hljs-string">"1024-1300"</span>/&gt;
+  &lt;port protocol=<span class="hljs-string">"udp"</span> port=<span class="hljs-string">"138"</span>/&gt;
+  &lt;port protocol=<span class="hljs-string">"udp"</span> port=<span class="hljs-string">"139"</span>/&gt;
+  &lt;port protocol=<span class="hljs-string">"udp"</span> port=<span class="hljs-string">"389"</span>/&gt;
+  &lt;port protocol=<span class="hljs-string">"udp"</span> port=<span class="hljs-string">"445"</span>/&gt;
+&lt;/service&gt;
+EOFXML
+systemctl restart firewalld
+firewall-cmd --permanent --add-service=freeipa-samba
+firewall-cmd --reload
+<span class="hljs-built_in">echo</span> <span class="hljs-keyword">done</span>
+</div></code></pre>
+<p>Позволим SAMBA серверу читать аттрибуты пользователей.</p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># kinit admin</span>
+[root@srv ~]<span class="hljs-comment"># ipa permission-add "CIFS server can read user passwords" \</span>
+                                --attrs={ipaNTHash,ipaNTSecurityIdentifier} \
+                                --<span class="hljs-built_in">type</span>=user --right={<span class="hljs-built_in">read</span>,search,compare} \
+                                --bindtype=permission
+[root@srv ~]<span class="hljs-comment"># ipa privilege-add "CIFS server privilege"</span>
+[root@srv ~]<span class="hljs-comment"># ipa privilege-add-permission "CIFS server privilege" \</span>
+                                --permission=<span class="hljs-string">"CIFS server can read user passwords"</span>
+[root@srv ~]<span class="hljs-comment"># ipa role-add "CIFS server"</span>
+
+[root@srv ~]<span class="hljs-comment"># ipa role-add-privilege "CIFS server" --privilege="CIFS server privilege"</span>
+[root@srv ~]<span class="hljs-comment"># ipa role-add-member "CIFS server" --services=cifs/srv.example.com</span>
+</div></code></pre>
+<p>Проверим, что SAMBA сервер теперь сможет читать аттрибуты пользователей, используя свой сервисный <code>Kerberos</code> билет.</p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># kdestroy -A</span>
+[root@srv ~]<span class="hljs-comment"># kinit -kt /etc/samba/samba.keytab cifs/host2.vm.example.com</span>
+[root@srv ~]<span class="hljs-comment"># ldapsearch -Y gssapi "(ipaNTHash=*)" ipaNTHash</span>
+...
+<span class="hljs-comment"># ppv, users, accounts, example.com</span>
+dn: uid=ppv,cn=users,cn=accounts,dc=example,dc=com
+ipaNTHash:: iEb36u6PsRetBr3YMLdYbA==
+...
+</div></code></pre>
+<p>Создадим каталог с файлом для пользователей, дадим доступ пользователям к домашним папкам.</p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># mkdir -p /opt/samba/example</span>
+[root@srv ~]<span class="hljs-comment"># semanage fcontext -a -t samba_share_t "/opt/samba/example(/.*)?"</span>
+[root@srv ~]<span class="hljs-comment"># echo this is a test file &gt; /opt/samba/shared/testfile.txt</span>
+[root@srv ~]<span class="hljs-comment"># restorecon -R /opt/samba/shared</span>
+[root@srv ~]<span class="hljs-comment"># setsebool -P samba_enable_home_dirs on &amp;</span>
+</div></code></pre>
+<p>Настроим конфигурационный файл SAMBA сервера</p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># vi /etc/samba/smb.conf</span>
+
+[global]
+    debug pid = yes
+    realm = EXAMPLE.COM
+    workgroup = EXAMPLE
+    domain master = Yes
+    ldap group suffix = cn=groups,cn=accounts
+    ldap machine suffix = cn=computers,cn=accounts
+    ldap ssl = off
+    ldap suffix = dc=example,dc=com
+    ldap user suffix = cn=users,cn=accounts
+    ldap admin dn = cn=Directory Manager
+    <span class="hljs-built_in">log</span> file = /var/<span class="hljs-built_in">log</span>/samba/<span class="hljs-built_in">log</span>
+    max <span class="hljs-built_in">log</span> size = 100000
+    domain logons = Yes
+    registry shares = Yes
+    <span class="hljs-built_in">disable</span> spoolss = Yes
+    dedicated keytab file = FILE:/etc/samba/samba.keytab
+    kerberos method = dedicated keytab
+    passdb backend = ipasam:ldap://ipa.example.com
+    security = USER
+    create krb5 conf = No
+    rpc_daemon:lsasd = fork
+    rpc_daemon:epmd = fork
+    rpc_server:tcpip = yes
+    rpc_server:netlogon = external
+    rpc_server:samr = external
+    rpc_server:lsasd = external
+    rpc_server:lsass = external
+    rpc_server:lsarpc = external
+    rpc_server:epmapper = external
+    ldapsam:trusted = yes
+    idmap config * : backend = tdb
+    client ipc signing = auto
+
+[shared]
+    path = /opt/samba/shared
+    writable = yes
+        browsable=yes
+        write list = @ipausers
+        guest ok = yes
+</div></code></pre>
+<p>Проверим конфигурационный файл <code>/etc/samba/smb.conf</code> на ошибки синтаксиса и запустим сервер.</p>
+<pre class="hljs"><code><div>[root@srv ~]<span class="hljs-comment"># testparm</span>
+[root@srv ~]<span class="hljs-comment"># systemctl start smb</span>
+[root@srv ~]<span class="hljs-comment"># systemctl enable smb</span>
+</div></code></pre>
+<p>Проверим доступ к <code>Samba</code> серверу пользователя FreeIPA домена.</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># kinit ppv</span>
+Password <span class="hljs-keyword">for</span> ppv@EXAMPLE.COM: &lt; password &gt;
+[root@ipa vagrant]<span class="hljs-comment"># smbclient -k -L srv.example.com</span>
+lp_load_ex: changing to config backend registry
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        shared          Disk
+        IPC$            IPC       IPC Service (Samba 4.7.1)
+Reconnecting with SMB1 <span class="hljs-keyword">for</span> workgroup listing.
+
+        Server               Comment
+        ---------            -------
+
+        Workgroup            Master
+        ---------            -------
+
+[root@ipa vagrant]<span class="hljs-comment"># smbclient -k //srv.example.com/shared</span>
+lp_load_ex: changing to config backend registry
+Try <span class="hljs-string">"help"</span> to get a list of possible commands.
+smb: \&gt; ls
+  .                                   D        0  Wed Sep 12 21:01:01 2018
+  ..                                  D        0  Wed Sep 12 21:00:34 2018
+  testfile.txt                        N       20  Wed Sep 12 21:01:01 2018
+
+                39269648 blocks of size 1024. 37422776 blocks available
+smb: \&gt; get testfile.txt
+getting file \testfile.txt of size 20 as testfile.txt (9.8 KiloBytes/sec) (average 9.8 KiloBytes/sec)
+smb: \&gt; quit
+[root@ipa vagrant]<span class="hljs-comment"># cat testfile.txt</span>
+this is a <span class="hljs-built_in">test</span> file
+[root@ipa vagrant]<span class="hljs-comment">#</span>
+</div></code></pre>
+<p>https://bgstack15.wordpress.com/2017/05/10/samba-share-with-freeipa-auth/
+https://www.arus.ru/index.php/biblioteka/shpory/item/10553-razvorachivaem-freeipa-server-2
+https://www.freeipa.org/page/Howto/Integrating_a_Samba_File_Server_With_IPA - в нашем примере не работает</p>
+<h4 id="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%B2%D0%B5%D0%B1-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B0-apache-%D1%81-https-%D0%B8-kerberos-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D0%B5%D0%B9">Настройка веб сервера Apache с HTTPS и Kerberos аутентификацией</h4>
+<p>https://www.freeipa.org/page/Web_App_Authentication</p>
+<p>Проверим, что все необходимые для нашей задачи пакеты установлены</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ sudo yum install -y httpd mod_auth_kerb mod_ssl ipa-client
+</div></code></pre>
+<p>Наш сервер ранее уже был включен в IPA домен, если это ещё не так, то выполните команду ниже.</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ sudo ipa-client-install    --domain=example.com \
+                                            --server=ipa.example.com \
+                                            --realm=EXAMPLE.COM \
+                                            --mkhomedir \
+                                            --hostname=srv.example.com \
+                                            --configure-ssh --configure-sshd
+</div></code></pre>
+<p>SPN запись для HTTP сервиса укже была создана и получен keytab файл.
+Если это ещё не так, то выполните</p>
+<pre class="hljs"><code><div>[vagrant@srv ~]$ sudo -s
+[root@srv vagrant]<span class="hljs-comment"># kinit admin</span>
+Password <span class="hljs-keyword">for</span> admin: &lt; password &gt;
+[root@srv ~]<span class="hljs-comment"># ipa service-add http/srv.example.com</span>
+------------------------------------------------
+Added service <span class="hljs-string">"http/srv.example.com@EXAMPLE.COM"</span>
+------------------------------------------------
+  Principal name: http/srv.example.com@EXAMPLE.COM
+  Principal <span class="hljs-built_in">alias</span>: http/srv.example.com@EXAMPLE.COM
+  Managed by: srv.example.com
+
+[root@srv vagrant]<span class="hljs-comment"># # ipa-getkeytab -s ipa.example.com \</span>
+                                    -p http/srv.example.com \
+                                    -k /etc/httpd/conf/httpd.keytab
+</div></code></pre>
+<p>Установим владельца файла <code>/etc/httpd/conf/httpd.keytab</code>, запросим SSL сертификат и пропишем его путь в концфигурационном файле.</p>
+<pre class="hljs"><code><div>[root@srv vagrant]<span class="hljs-comment"># chown apache /etc/httpd/conf/httpd.keytab</span>
+[root@srv vagrant]<span class="hljs-comment"># chmod 640 /etc/httpd/conf/httpd.keytab</span>
+[root@srv vagrant]<span class="hljs-comment"># ipa-getcert request -k /etc/pki/tls/private/srv.example.com.key -f /etc/pki/tls/certs/srv.example.com.crt -K http/srv.example.com -g 3072</span>
+[root@srv vagrant]<span class="hljs-comment"># vim /etc/httpd/conf.d/ssl.conf</span>
+
+[...]
+SSLCertificateFile /etc/pki/tls/certs/srv.example.com.crt
+SSLCertificateKeyFile /etc/pki/tls/private/srv.example.com.key
+SSLCertificateChainFile /etc/ipa/ca.crt
+
+[...]
+SSLCompression off
+SSLProtocol all -SSLv2 -SSLv3 -TLSv1.0
+SSLHonorCipherOrder on
+SSLCipherSuite <span class="hljs-string">"EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH EDH+aRSA !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4"</span>
+</div></code></pre>
+<p>Добавим настройку модуля <code>mod_auth_kerb</code> для проверки Kerberos при открытии виртуальной папки <code>/var/www/html/private</code></p>
+<pre class="hljs"><code><div>[root@srvvagrant]<span class="hljs-comment"># cat &gt; /var/www/html/index.html &lt;&lt;EOF</span>
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt; ... Site title ... &lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+.... This is a default web site ...
+&lt;/body&gt;
+&lt;/html&gt;
+EOF
+[root@srv vagrant]<span class="hljs-comment"># mkdir -p /var/www/html/private</span>
+[root@srv vagrant]<span class="hljs-comment"># cat &gt; /var/www/html/private/index.html &lt;&lt;EOF</span>
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt; ... Site title ... &lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+.... This is an Internal private web site ...
+
+.... If you see this, you had passed Kerberos Authentification ...
+&lt;/body&gt;
+&lt;/html&gt;
+EOF
+
+[root@srv vagrant]<span class="hljs-comment"># cat &gt; /etc/httpd/conf.d/auth_kerb.conf &lt;&lt;EOF</span>
+&lt;Location /private&gt;
+  SSLRequireSSL
+  AuthType Kerberos
+  AuthName <span class="hljs-string">"Kerberos Login"</span>
+  KrbMethodNegotiate On
+  KrbMethodK5Passwd On
+  KrbAuthRealms EXAMPLE.COM
+  Krb5KeyTab /etc/httpd/conf/httpd.keytab
+  KrbSaveCredentials on
+  KrbVerifyKDC on
+  KrbServiceName Any
+  require valid-user
+&lt;/Location&gt;
+EOF
+
+[root@srv vagrant]<span class="hljs-comment"># systemctl restart httpd</span>
+
+[root@srv vagrant]<span class="hljs-comment"># firewall-cmd --permanent --add-service=https</span>
+[root@srv vagrant]<span class="hljs-comment"># firewall-cmd --reload</span>
+</div></code></pre>
+<ul>
+<li>Проверим работу веб сервера с SSO аутентификацией <code>Kerberos</code>.</li>
+</ul>
+<p>Зайдите на под пользователем <code>ppv</code> в графическую оболочку <code>cl.example.com</code>. Запустите <code>Mozilla Firefox</code> и откройте <a href="https://srv.example.com">https://srv.example.com</a>.
+Удостоверьтесь в том, что сайт предлагает доверенный HTTPS сертификат.</p>
+<p><img src="resources/srv_https.png" alt="srv_https" title="Веб-сервер с доверенным сертификатом"></p>
+<p>Теперь откройте страницу <a href="https://srv.example.com/private">https://srv.example.com/private</a> страница должна открыться автоматически без запроса логина и пароля.</p>
+<p>Если страница не открылась и появился запрос логина и пароля, то проверьте что Firefox настроен так, как показано на скриншоте.</p>
+<p><img src="resources/firefox_negotiate_auth.png" alt="firefox_negotiate_auth" title="Mozilla Firefox: about:config negotiate-auth"></p>
+<p>Проверить доступ с <code>Kerberos</code> аутентификацией можно также и через командную строку.</p>
+<pre class="hljs"><code><div>[ppv@cl1 ~]$ curl https://srv.example.com/private/
+&lt;!DOCTYPE HTML PUBLIC <span class="hljs-string">"-//IETF//DTD HTML 2.0//EN"</span>&gt;
+&lt;html&gt;&lt;head&gt;
+&lt;title&gt;401 Unauthorized&lt;/title&gt;
+&lt;/head&gt;&lt;body&gt;
+&lt;h1&gt;Unauthorized&lt;/h1&gt;
+&lt;p&gt;This server could not verify that you
+are authorized to access the document
+requested.  Either you supplied the wrong
+credentials (e.g., bad password), or your
+browser doesnt understand how to supply
+the credentials required.&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;
+
+[ppv@cl1 ~]$ curl --negotiate -u : https://srv.example.com/private/
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt; ... Site title ... &lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+.... This is an Internal private web site ...
+
+.... If you see this, you had passed Kerberos Authentification ...
+&lt;/body&gt;
+&lt;/html&gt;
+[ppv@cl1 ~]$
+</div></code></pre>
+<p>Пример настройки <code>Kerberos</code> аутентификации Apache c модулем <code>MOD_AUTH_KERB</code> можно взять здесь:
+https://access.redhat.com/documentation/en-us/red_hat_jboss_web_server/3/html/http_connectors_and_load_balancing_guide/sect-mod_auth_kerb_example</p>
+<p>Руководства по настройке веб приложений с аутентификацией <code>Kerberos</code> и Federated SSO совместно с SAML2 можно взять здесь:</p>
+<p>https://www.freeipa.org/page/Web_App_Authentication/Example_setup</p>
+<p>https://linuxmonk.ch/wordpress/index.php/2014/kerberized-http-auth-on-apache-mod_ssl-with-freeipa/</p>
+<p>https://github.com/spacewalkproject/spacewalk/wiki/SpacewalkAndIPA</p>
+<p>https://ipsilon-project.org/doc/example/gitlab.html</p>
+<h2 id="%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-4-%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B3%D1%80%D1%83%D0%BF%D0%BF%D0%B0%D0%BC%D0%B8-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%B8-%D1%85%D0%BE%D1%81%D1%82%D0%BE%D0%B2">Упражнение 4: Управление группами пользователей и хостов</h2>
+<p>Создадим группы пользователей и хостов, добавим участников в группы.</p>
+<p>Выполните все действия на: cl.example.com под пользователем vagrant.</p>
+<p>Создадим группы пользователей с помощью командной строки</p>
+<pre class="hljs"><code><div>[vagrant@cl ~]$ kinit admin
+Password <span class="hljs-keyword">for</span> admin@EXAMPLE.COM:
+[vagrant@cl ~]$ ipa group-add --desc=<span class="hljs-string">"Admins of Web Servers group"</span> web_servers_admins
+--------------------------------
+Added group <span class="hljs-string">"web_servers_admins"</span>
+--------------------------------
+  Group name: web_servers_admins
+  Description: Admins of Web Servers group
+  GID: 1896200013
+[vagrant@ipa ~]$ ipa group-add-member web_servers_admins --users=ppv
+  Group name: web_servers_admins
+  Description: Admins of Web Servers group
+  GID: 1896200013
+  Member users: ppv
+-------------------------
+Number of members added 1
+-------------------------
+[vagrant@ipa ~]$ ipa group-add-member ws_helpdesk --users={lvas,ppv,ipetrov}
+  Group name: ws_helpdesk
+  Description: Workstation Helpdesk
+  GID: 1896200012
+  Member users: lvas, ppv, ipetrov
+-------------------------
+Number of members added 3
+-------------------------
+[vagrant@ipa ~]$ ipa group-remove-member ws_helpdesk --users=ipetrov
+  Group name: ws_helpdesk
+  Description: Workstation Helpdesk
+  GID: 1896200012
+  Member users: lvas, ppv
+---------------------------
+Number of members removed 1
+---------------------------
+[vagrant@ipa ~]$ ipa group-add --desc=<span class="hljs-string">'group to add and delete'</span> testgroup_to_delete
+---------------------------------
+Added group <span class="hljs-string">"testgroup_to_delete"</span>
+---------------------------------
+  Group name: testgroup_to_delete
+  Description: group to add and delete
+  GID: 1896200014
+[root@srv vagrant]<span class="hljs-comment"># ipa group-del testgroup_to_delete</span>
+-----------------------------------
+Deleted group <span class="hljs-string">"testgroup_to_delete"</span>
+-----------------------------------
+[vagrant@ipa ~]$ ipa group-find
+----------------
+7 groups matched
+----------------
+  Group name: admins
+  Description: Account administrators group
+  GID: 1896200000
+
+  Group name: editors
+  Description: Limited admins who can edit other users
+  GID: 1896200002
+
+  Group name: ipausers
+  Description: Default group <span class="hljs-keyword">for</span> all users
+
+  Group name: trust admins
+  Description: Trusts administrators group
+
+  Group name: web_servers_admins
+  Description: Admins of Web Servers group
+  GID: 1896200013
+
+  Group name: webservers
+  Description: users of Web Servers group
+  GID: 1896200009
+
+  Group name: ws_helpdesk
+  Description: Workstation Helpdesk
+  GID: 1896200012
+----------------------------
+Number of entries returned 7
+----------------------------
+[vagrant@ipa ~]$
+</div></code></pre>
+<p>Управление группами пользователей также можно выполнить в веб интерфейсе.</p>
+<p><img src="resources/ipa_webadmin_usergroups.png" alt="ipa-webadmin-usergroups" title="Веб-интерфейс FreeIPA Сервера: Управление группами пользователей"></p>
+<p>Создадим группу хостов <code>restricted</code>, добавим в неё компьютер <code>srv</code> .</p>
+<p><img src="resources/ipa_webadmin_hostgroup_add.png" alt="ipa-webadmin-hostgroups-add" title="Веб-интерфейс FreeIPA Сервера: Создание группы хостов"></p>
+<p><img src="resources/ipa_webadmin_hostgroup_addhost.png" alt="ipa-webadmin-hostgroups-addhost" title="Веб-интерфейс FreeIPA Сервера: Добавление сервера в группу"></p>
+<h2 id="%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-5-%D0%B8%D0%BD%D1%82%D0%B5%D0%B3%D1%80%D0%B0%D1%86%D0%B8%D1%8F-ipa-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D0%B0-%D1%81-active-directory">Упражнение 5: Интеграция IPA домена с Active Directory</h2>
+<p>Теория
+https://www.freeipa.org/page/Active_Directory_trust_setup</p>
+<p>В лабораторной среде настроен Active Directory домен <code>domain.com</code> с компьютерами</p>
+<table>
+<thead>
+<tr>
+<th>Имя компьютера</th>
+<th>Роль</th>
+<th>Версия операционной системы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dc.domain.com</td>
+<td>Контроллер домена</td>
+<td>Windows Server 2016</td>
+</tr>
+<tr>
+<td>wincl.domain.com</td>
+<td>Контроллер домена</td>
+<td>Windows 10</td>
+</tr>
+</tbody>
+</table>
+<p>На компьютерах заведены пользователи</p>
+<table>
+<thead>
+<tr>
+<th>Имя пользователя</th>
+<th>Пароль</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Domain\Administrator</td>
+<td>vagrant</td>
+</tr>
+<tr>
+<td>Domain\vagrant</td>
+<td>vagrant</td>
+</tr>
+</tbody>
+</table>
+<p>Выполните следующие действия на <code>ipa.example.com</code>, используя учетную запись <code>vagrant</code> и пароль <code>vagrant</code>.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ yum install -y ipa-server-trust-ad samba-winbind-clients
+...
+</div></code></pre>
+<p>Добавим перенаправление запросов dns зоны <code>domain.com</code> на контроллер домена. Проверим разрешение имен и доступ к ldap сервису DC.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]$ kinit admin
+Password <span class="hljs-keyword">for</span> admin@EXAMPLE.COM:
+[vagrant@ipa ~]$ ipa dnsforwardzone-add domain.com \
+                                      --forward-policy=only \
+                                      --forwarder=172.25.0.100 \
+                                      --skip-overlap-check
+Server will check DNS forwarder(s).
+This may take some time, please <span class="hljs-built_in">wait</span> ...
+  Zone name: domain.com.
+  Active zone: TRUE
+  Zone forwarders: 172.25.0.100
+  Forward policy: only
+[vagrant@ipa ~]$ dig +noall +answer SOA domain.com
+domain.com.             3423    IN      SOA     dc.domain.com. hostmaster.domain.com. 53 900 600 86400 3600
+[vagrant@ipa ~]$ dig +noall +answer SRV _ldap._tcp.domain.com
+_ldap._tcp.domain.com.  600     IN      SRV     0 100 389 dc.domain.com.
+[vagrant@ipa ~]$ dig +noall +answer SRV dc.domain.com
+[vagrant@ipa ~]$ dig +noall +answer A dc.domain.com
+dc.domain.com.          3600    IN      A       172.25.0.100
+[vagrant@ipa ~]$ LDAPTLS_REQCERT=never ldapsearch -x -Z -D <span class="hljs-string">'DOMAIN\administrator'</span> \
+                                                        -w <span class="hljs-string">'vagrant'</span> -h dc.domain.com \
+                                                        -b <span class="hljs-string">"dc=domain,dc=com"</span> \
+                                                        -s sub <span class="hljs-string">"(objectClass=user)"</span>
+</div></code></pre>
+<p>Выполните следующие действия на dc.example.com</p>
+<pre class="hljs"><code><div>C:\Users\administrator&gt;dnscmd /zoneadd example.com /dsforwarder 172.25.0.10 /TimeOut 30
+DNS server . version is 10.0.14393
+
+Creating zone in built-in domain directory partition...
+DNS Server . created zone example.com:
+
+Command completed successfully.
+
+C:\Users\administrator&gt;nslookup -type=SRV _ldap._tcp.example.com
+Server:  localhost6.localdomain6
+Address:  ::1
+
+Non-authoritative answer:
+_ldap._tcp.example.com  SRV service location:
+          priority       = 0
+          weight         = 100
+          port           = 389
+          svr hostname   = ipa.example.com
+
+ipa.example.com internet address = 172.25.0.10
+
+C:\Users\administrator&gt;ping ipa.example.com
+
+Pinging ipa.example.com [172.25.0.10] with 32 bytes of data:
+Reply from 172.25.0.10: bytes=32 time&lt;1ms TTL=64
+Reply from 172.25.0.10: bytes=32 time&lt;1ms TTL=64
+...
+C:\Users\administrator&gt;
+</div></code></pre>
+<p>Выполним необходимые конфигурации на IPA сервере для создания доверительных отношений.
+Выполните следующие действия на <code>ipa.example.com</code>.</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># ipa-adtrust-install --add-sids -U --netbios-name="EXAMPLE" --enable-compat -a "password"</span>
+
+The <span class="hljs-built_in">log</span> file <span class="hljs-keyword">for</span> this installation can be found <span class="hljs-keyword">in</span> /var/<span class="hljs-built_in">log</span>/ipaserver-install.log
+==============================================================================
+This program will setup components needed to establish trust to AD domains <span class="hljs-keyword">for</span>
+the IPA Server.
+
+This includes:
+  * Configure Samba
+  * Add trust related objects to IPA LDAP server
+
+To accept the default shown <span class="hljs-keyword">in</span> brackets, press the Enter key.
+
+Configuring cross-realm trusts <span class="hljs-keyword">for</span> IPA server requires password <span class="hljs-keyword">for</span> user <span class="hljs-string">'admin'</span>.
+This user is a regular system account used <span class="hljs-keyword">for</span> IPA server administration.
+
+admin password:
+
+IPA generated smb.conf detected.
+Overwrite smb.conf? [no]: yes
+Do you want to <span class="hljs-built_in">enable</span> support <span class="hljs-keyword">for</span> trusted domains <span class="hljs-keyword">in</span> Schema Compatibility plugin?
+This will allow clients older than SSSD 1.9 and non-Linux clients to work with trusted users.
+
+Enable trusted domains support <span class="hljs-keyword">in</span> slapi-nis? [no]:
+
+
+The following operations may take some minutes to complete.
+Please <span class="hljs-built_in">wait</span> until the prompt is returned.
+
+Configuring CIFS
+  [1/23]: validate server hostname
+  [2/23]: stopping smbd
+  [3/23]: creating samba domain object
+Samba domain object already exists
+  [4/23]: creating samba config registry
+  [5/23]: writing samba config file
+  [6/23]: adding cifs Kerberos principal
+  [7/23]: adding cifs and host Kerberos principals to the adtrust agents group
+  [8/23]: check <span class="hljs-keyword">for</span> cifs services defined on other replicas
+  [9/23]: adding cifs principal to S4U2Proxy targets
+cifs principal already targeted, nothing to <span class="hljs-keyword">do</span>.
+  [10/23]: adding admin(group) SIDs
+Admin SID already <span class="hljs-built_in">set</span>, nothing to <span class="hljs-keyword">do</span>
+Admin group SID already <span class="hljs-built_in">set</span>, nothing to <span class="hljs-keyword">do</span>
+  [11/23]: adding RID bases
+RID bases already <span class="hljs-built_in">set</span>, nothing to <span class="hljs-keyword">do</span>
+  [12/23]: updating Kerberos config
+<span class="hljs-string">'dns_lookup_kdc'</span> already <span class="hljs-built_in">set</span> to <span class="hljs-string">'true'</span>, nothing to <span class="hljs-keyword">do</span>.
+  [13/23]: activating CLDAP plugin
+CLDAP plugin already configured, nothing to <span class="hljs-keyword">do</span>
+  [14/23]: activating sidgen task
+Sidgen task plugin already configured, nothing to <span class="hljs-keyword">do</span>
+  [15/23]: configuring smbd to start on boot
+  [16/23]: adding special DNS service records
+  [17/23]: restarting Directory Server to take MS PAC and LDAP plugins changes into account
+  [18/23]: adding fallback group
+Fallback group already <span class="hljs-built_in">set</span>, nothing to <span class="hljs-keyword">do</span>
+  [19/23]: adding Default Trust View
+Default Trust View already exists.
+  [20/23]: setting SELinux booleans
+  [21/23]: starting CIFS services
+  [22/23]: adding SIDs to existing users and groups
+This step may take considerable amount of time, please <span class="hljs-built_in">wait</span>..
+  [23/23]: restarting smbd
+Done configuring CIFS.
+
+=============================================================================
+Setup complete
+
+You must make sure these network ports are open:
+        TCP Ports:
+          * 135: epmap
+          * 138: netbios-dgm
+          * 139: netbios-ssn
+          * 445: microsoft-ds
+          * 1024..1300: epmap listener range
+          * 3268: msft-gc
+        UDP Ports:
+          * 138: netbios-dgm
+          * 139: netbios-ssn
+          * 389: (C)LDAP
+          * 445: microsoft-ds
+
+See the ipa-adtrust-install(1) man page <span class="hljs-keyword">for</span> more details
+
+=============================================================================
+
+[root@ipa vagrant]<span class="hljs-comment">#</span>
+</div></code></pre>
+<p>Перед созданием доверительных отношений проверим синхронизацию времени и часовые пояса.</p>
+<p>Выполните следующие действия на dc.example.com</p>
+<pre class="hljs"><code><div>C:\Users\administrator&gt;tzutil /s &quot;N. Central Asia Standard Time&quot;  
+
+C:\Users\administrator&gt;tzutil /g
+N. Central Asia Standard Time
+C:\Users\administrator&gt;date /T
+Thu 09/13/2018
+
+C:\Users\administrator&gt;time /T
+03:02 PM
+
+</div></code></pre>
+<ul>
+<li>
+<p><code>tzutil /l</code> - Cписок всех часовых поясов</p>
+</li>
+<li>
+<p><code>tzutil /?</code> - Справка по команде <code>tzutil</code></p>
+</li>
+<li>
+<p><code>tzutil /l</code> - Cписок всех часовых поясов</p>
+</li>
+<li>
+<p><code>tzutil /?</code> - Справка по команде <code>tzutil</code></p>
+</li>
+</ul>
+<p>Выполните следующие действия на <code>ipa.example.com</code>.</p>
+<pre class="hljs"><code><div>[vagrant@ipa ~]<span class="hljs-comment"># sudo timedatectl set-timezone Asis/Novosibirsk</span>
+[vagrant@ipa ~]$ timedatectl
+      Local time: Thu 2018-09-13 15:03:11 +07
+  Universal time: Thu 2018-09-13 08:03:11 UTC
+        RTC time: Thu 2018-09-13 08:03:11
+       Time zone: Etc/GMT-7 (+07, +0700)
+     NTP enabled: no
+NTP synchronized: no
+ RTC <span class="hljs-keyword">in</span> <span class="hljs-built_in">local</span> TZ: no
+      DST active: n/a
+[vagrant@ipa ~]$ sudo -s
+[vagrant@ipa ~]$ sudo ntpdate -u dc.domain.com
+13 Sep 15:10:55 ntpdate[5114]: adjust time server 172.25.0.100 offset -0.000767 sec
+[root@ipa vagrant]<span class="hljs-comment"># echo server dc.domain.com &gt;&gt; /etc/ntp.conf</span>
+[root@ipa vagrant]<span class="hljs-comment"># systemctl restart ntpd</span>
+[root@ipa vagrant]<span class="hljs-comment"># ntpstat</span>
+synchronised to <span class="hljs-built_in">local</span> net at stratum 11
+   time correct to within 448 ms
+   polling server every 64 s
+[root@ipa vagrant]<span class="hljs-comment"># ntpd -q</span>
+[root@ipa vagrant]<span class="hljs-comment"># ntpq -p</span>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+*LOCAL(0)        .LOCL.          10 l   38   64   37    0.000    0.000   0.000
+ 172.25.0.100    .LOCL.           1 u   31   64   37    0.432   10.817  15.472
+</div></code></pre>
+<ul>
+<li>timedatectl - показать текущие настройки времени и часовой пояс</li>
+<li>timedatectl list-timezones - вывести список всех часовых поясов</li>
+</ul>
+<p>Создадим доверительные отношения между IPA доменом и Active Directory</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># ipa trust-add --type=ad domain.com --admin Administrator --password --two-way=true</span>
+Active Directory domain administrator s password:
+-------------------------------------------
+Re-established trust to domain <span class="hljs-string">"domain.com"</span>
+-------------------------------------------
+  Realm name: domain.com
+  Domain NetBIOS name: DOMAIN
+  Domain Security Identifier: S-1-5-21-3619292856-10254698-3139940813
+  Trust direction: Two-way trust
+  Trust <span class="hljs-built_in">type</span>: Active Directory domain
+  Trust status: Established and verified
+[root@ipa vagrant]<span class="hljs-comment"># ipa trustdomain-find DOMAIN.COM</span>
+  Domain name: domain.com
+  Domain NetBIOS name: DOMAIN
+  Domain Security Identifier: S-1-5-21-3619292856-10254698-3139940813
+  Domain enabled: True
+----------------------------
+Number of entries returned 1
+----------------------------
+</div></code></pre>
+<p>Добавим администраторов AD домена <code>domain.com</code> с во внешнюю группу <code>ad_admins_external</code></p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># ipa group-add --desc='Domain\Domain Admins external map' ad_admins_external --external</span>
+--------------------------------
+Added group <span class="hljs-string">"ad_admins_external"</span>
+--------------------------------
+  Group name: ad_admins_external
+  Description: Domain\Domain Admins external map
+</div></code></pre>
+<p>Создадим POSIX группу для связи с внешней группой</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># ipa group-add --desc='Domain\Domain Admins map' ad_admins</span>
+-----------------------
+Added group <span class="hljs-string">"ad_admins"</span>
+-----------------------
+  Group name: ad_admins
+  Description: Domain\Domain Admins map
+  GID: 1896200018
+</div></code></pre>
+<p>Добавим группу из AD домена во внешнюю группу IPA домена.</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># ipa group-add-member ad_admins_external --external 'DOMAIN\Domain Admins'</span>
+[member user]: &lt; Enter &gt;
+[member group]: &lt; Enter &gt;
+  Group name: ad_admins_external
+  Description: Domain\Domain Admins external map
+  External member: S-1-5-21-3619292856-10254698-3139940813-512
+-------------------------
+Number of members added 1
+-------------------------
+</div></code></pre>
+<p>Включим внешнюю группу в POSIX группу</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># ipa group-add-member ad_admins --group ad_admins_external</span>
+  Group name: ad_admins
+  Description: Domain\Domain Admins map
+  GID: 1896200018
+  Member groups: ad_admins_external
+-------------------------
+Number of members added 1
+-------------------------
+</div></code></pre>
+<p>Повторим операции для обычных пользователей домена</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># ipa group-add --desc='DOMAIN\Domain Users external map' ad_users_external --external</span>
+[root@ipa vagrant]<span class="hljs-comment"># ipa group-add --desc='DOMAIN\Domain Users users' ad_users</span>
+[root@ipa vagrant]<span class="hljs-comment"># ipa group-add-member ad_users_external --external 'DOMAIN\Domain Users'</span>
+[root@ipa vagrant]<span class="hljs-comment"># ipa group-add-member ad_users --group ad_users_external</span>
+</div></code></pre>
+<p>Проверим, с помощью утилиты <code>wbinfo</code> получим <code>SID</code> групп и пользователей.</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># wbinfo -n 'domain\administrator'</span>
+S-1-5-21-3619292856-10254698-3139940813-500 SID_USER (1)
+[root@ipa vagrant]<span class="hljs-comment"># wbinfo -n 'domain\Domain Admins'</span>
+S-1-5-21-3619292856-10254698-3139940813-512 SID_DOM_GROUP (2)
+[root@ipa vagrant]<span class="hljs-comment"># wbinfo -n 'domain\Domain Users'</span>
+S-1-5-21-3619292856-10254698-3139940813-513 SID_DOM_GROUP (2)
+</div></code></pre>
+<p>Если вы получили ошибку типа <code>wbclookupname: wbc_err_domain_not_found</code> и в журнальном файле <code>/var/log/samba/log.wb-DOMAIN</code> вы видите ошибку типа   <code>Failed to prepare SMB connection to DC: NT_STATUS_NETWORK_NAME_DELETED</code>. дайте такие команды</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># net conf setparm global "client ipc signing" auto</span>
+[root@ipa vagrant]<span class="hljs-comment"># systemctl restart winbind</span>
+</div></code></pre>
+<p>Проверим доступ к общей папке IPA сервера пользователя AD домена.</p>
+<p>Создадим папку общего доступа <code>/smbshare</code> в новом каталоге и сделаем её доступной для пользователей AD домена.</p>
+<pre class="hljs"><code><div>[root@ipa vagrant]<span class="hljs-comment"># mkdir -p /opt/samba/smbshare/</span>
+[root@ipa vagrant]<span class="hljs-comment"># semanage fcontext -a -t samba_share_t "/opt/samba/smbshare(/.*)?"</span>
+[root@ipa vagrant]<span class="hljs-comment"># restorecon -R /opt/samba/</span>
+[root@ipa vagrant]<span class="hljs-comment"># chmod a+w -R /opt/samba/smbshare</span>
+[root@ipa vagrant]<span class="hljs-comment"># echo 'this is a test data in file' &gt; /opt/samba/smbshare/readme.txt</span>
+[root@ipa vagrant]<span class="hljs-comment"># GROUPSID=`wbinfo -n 'DOMAIN\Domain Users'|awk '{print$1}'`</span>
+[root@ipa vagrant]<span class="hljs-comment"># net conf setparm 'share' 'comment' 'smbshare to test DOMAIN\'Domain Users' access'</span>
+[root@ipa vagrant]<span class="hljs-comment"># net conf setparm 'share' 'read only' 'no'</span>
+[root@ipa vagrant]<span class="hljs-comment"># net conf setparm 'share' 'valid users' "$GROUPSID"</span>
+[root@ipa vagrant]<span class="hljs-comment"># net conf setparm 'share' 'path' '/opt/samba/smbshare'</span>
+[root@ipa vagrant]<span class="hljs-comment"># smbcontrol smbd reload-config</span>
+
+</div></code></pre>
+<p>Совместно используемый каталог теперь доступен для пользователей AD домена. Проверим доступ.
+Зайдите на компьютер  <code>dc</code> под пользователем AD домена, например <code>DOMAIN\vagrant</code>  и откройте папку общего доступа <code>\\ipa.example.com\share</code>. Откройте файл <code>readme.txt</code>.
+<img src="resources/windc_ipashare.png" alt="dc_ipashare" title="Папка общего доступа share">
+Попробуйте создать любой файл или каталог в общей папке.</p>
+<p>Запустите терминал <code>cmd.exe</code> и дайте команду <code>klist</code>. Удостоверьтесь что был выдан <code>Kerberos</code> билет <code>cifs/ipa.example.com</code></p>
+<pre class="hljs"><code><div><span class="hljs-function">C:\<span class="hljs-title">Users</span>\<span class="hljs-title">vagrant</span>&gt;<span class="hljs-title">klist</span>
+
+<span class="hljs-title">Current</span> <span class="hljs-title">LogonId</span> <span class="hljs-title">is</span> 0:0<span class="hljs-title">x34268</span>
+
+<span class="hljs-title">Cached</span> <span class="hljs-title">Tickets</span>: (3)
+
+#0&gt;     <span class="hljs-title">Client</span>: <span class="hljs-title">vagrant</span> @ <span class="hljs-title">DOMAIN.COM</span>
+        <span class="hljs-title">Server</span>: <span class="hljs-title">krbtgt</span>/<span class="hljs-title">EXAMPLE.COM</span> @ <span class="hljs-title">DOMAIN.COM</span>
+        <span class="hljs-title">KerbTicket</span> <span class="hljs-title">Encryption</span> <span class="hljs-title">Type</span>: <span class="hljs-title">AES</span>-256-<span class="hljs-title">CTS</span>-<span class="hljs-title">HMAC</span>-<span class="hljs-title">SHA1</span>-96
+        <span class="hljs-title">Ticket</span> <span class="hljs-title">Flags</span> 0<span class="hljs-title">x40a50000</span> -&gt; <span class="hljs-title">forwardable</span> <span class="hljs-title">renewable</span> <span class="hljs-title">pre_authent</span> <span class="hljs-title">ok_as_delegate</span> <span class="hljs-title">name_canonicalize</span>
+        <span class="hljs-title">Start</span> <span class="hljs-title">Time</span>: 9/14/2018 13:28:18 (<span class="hljs-title">local</span>)
+        <span class="hljs-title">End</span> <span class="hljs-title">Time</span>:   9/14/2018 23:28:18 (<span class="hljs-title">local</span>)
+        <span class="hljs-title">Renew</span> <span class="hljs-title">Time</span>: 9/21/2018 13:28:18 (<span class="hljs-title">local</span>)
+        <span class="hljs-title">Session</span> <span class="hljs-title">Key</span> <span class="hljs-title">Type</span>: <span class="hljs-title">AES</span>-256-<span class="hljs-title">CTS</span>-<span class="hljs-title">HMAC</span>-<span class="hljs-title">SHA1</span>-96
+        <span class="hljs-title">Cache</span> <span class="hljs-title">Flags</span>: 0
+        <span class="hljs-title">Kdc</span> <span class="hljs-title">Called</span>: <span class="hljs-title">DC</span>
+
+#1&gt;     <span class="hljs-title">Client</span>: <span class="hljs-title">vagrant</span> @ <span class="hljs-title">DOMAIN.COM</span>
+        <span class="hljs-title">Server</span>: <span class="hljs-title">krbtgt</span>/<span class="hljs-title">DOMAIN.COM</span> @ <span class="hljs-title">DOMAIN.COM</span>
+        <span class="hljs-title">KerbTicket</span> <span class="hljs-title">Encryption</span> <span class="hljs-title">Type</span>: <span class="hljs-title">AES</span>-256-<span class="hljs-title">CTS</span>-<span class="hljs-title">HMAC</span>-<span class="hljs-title">SHA1</span>-96
+        <span class="hljs-title">Ticket</span> <span class="hljs-title">Flags</span> 0<span class="hljs-title">x40e10000</span> -&gt; <span class="hljs-title">forwardable</span> <span class="hljs-title">renewable</span> <span class="hljs-title">initial</span> <span class="hljs-title">pre_authent</span> <span class="hljs-title">name_canonicalize</span>
+        <span class="hljs-title">Start</span> <span class="hljs-title">Time</span>: 9/14/2018 13:28:18 (<span class="hljs-title">local</span>)
+        <span class="hljs-title">End</span> <span class="hljs-title">Time</span>:   9/14/2018 23:28:18 (<span class="hljs-title">local</span>)
+        <span class="hljs-title">Renew</span> <span class="hljs-title">Time</span>: 9/21/2018 13:28:18 (<span class="hljs-title">local</span>)
+        <span class="hljs-title">Session</span> <span class="hljs-title">Key</span> <span class="hljs-title">Type</span>: <span class="hljs-title">RSADSI</span> <span class="hljs-title">RC4</span>-<span class="hljs-title">HMAC</span>(<span class="hljs-title">NT</span>)
+        <span class="hljs-title">Cache</span> <span class="hljs-title">Flags</span>: 0<span class="hljs-title">x1</span> -&gt; <span class="hljs-title">PRIMARY</span>
+        <span class="hljs-title">Kdc</span> <span class="hljs-title">Called</span>: <span class="hljs-title">DC</span>
+
+#2&gt;     <span class="hljs-title">Client</span>: <span class="hljs-title">vagrant</span> @ <span class="hljs-title">DOMAIN.COM</span>
+        <span class="hljs-title">Server</span>: <span class="hljs-title">cifs</span>/<span class="hljs-title">ipa.example.com</span> @ <span class="hljs-title">EXAMPLE.COM</span>
+        <span class="hljs-title">KerbTicket</span> <span class="hljs-title">Encryption</span> <span class="hljs-title">Type</span>: <span class="hljs-title">AES</span>-256-<span class="hljs-title">CTS</span>-<span class="hljs-title">HMAC</span>-<span class="hljs-title">SHA1</span>-96
+        <span class="hljs-title">Ticket</span> <span class="hljs-title">Flags</span> 0<span class="hljs-title">x40a90000</span> -&gt; <span class="hljs-title">forwardable</span> <span class="hljs-title">renewable</span> <span class="hljs-title">pre_authent</span> <span class="hljs-title">name_canonicalize</span> 0<span class="hljs-title">x80000</span>
+        <span class="hljs-title">Start</span> <span class="hljs-title">Time</span>: 9/14/2018 13:28:15 (<span class="hljs-title">local</span>)
+        <span class="hljs-title">End</span> <span class="hljs-title">Time</span>:   9/14/2018 23:28:18 (<span class="hljs-title">local</span>)
+        <span class="hljs-title">Renew</span> <span class="hljs-title">Time</span>: 9/21/2018 13:28:15 (<span class="hljs-title">local</span>)
+        <span class="hljs-title">Session</span> <span class="hljs-title">Key</span> <span class="hljs-title">Type</span>: <span class="hljs-title">AES</span>-256-<span class="hljs-title">CTS</span>-<span class="hljs-title">HMAC</span>-<span class="hljs-title">SHA1</span>-96
+        <span class="hljs-title">Cache</span> <span class="hljs-title">Flags</span>: 0
+        <span class="hljs-title">Kdc</span> <span class="hljs-title">Called</span>: <span class="hljs-title">ipa.example.com</span>
+
+<span class="hljs-title">C</span>:\<span class="hljs-title">Users</span>\<span class="hljs-title">vagrant</span>&gt;
+</span></div></code></pre>
+<p>Проверим беспарольный доступ по SSH к компьютеру IPA домена</p>
+<p>Загрузим <code>Putty</code> и расположим его исполняемый файл прямо на рабочем столе текущего пользователя.</p>
+<pre class="hljs"><code><div>C:\Users\vagrant&gt;powershell
+Windows PowerShell
+Copyright (C) 2016 Microsoft Corporation. All rights reserved.
+
+PS C:\Users\vagrant&gt; wget -UseBasicParsing  https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe `
+                          -OutFile Desktop/Putty.exe
+</div></code></pre>
+<p>Запустим и настроим Putty так, как указано на скриншоте.</p>
+<p><img src="resources/Putty_Allow_GSSAPI_Delegation.png" alt="Putty_Allow_GSSAPI_Delegation" title="Allow GSSAPI Delegation"></p>
+<p>Укажите в качестве адреса <code>OpenSSH</code> сервера строку формата <code>username@domain.tld@hostname.tld</code>.
+Для пользователя <code>vagrant</code> в домене <code>domain.com</code> при подключении к серверу <code>ipa.example.com</code> строка будет быглядеть так, как на скриншоте.</p>
+<p><img src="resources/putty_ipa.example.com.png" alt="putty_ipa.example.com" title="Putty Session: ipa.example.com"></p>
+<p>В окне &quot;PuTTY Security Alert&quot; нажмите <code>Yes</code>.</p>
+<p><img src="resources/putty_security_alert.png" alt="putty_security_alert.png " title="PuTTY Security Alert"></p>
+<p>Подключение должно пройти без запроса логина и пароля и использованием <code>Kerberos</code>билета, выданного пользователю при интерактивном входе.</p>
+<p>Повторите предыдущие операции, зайдя интерактивно на компьютер участник домена <code>wincl.domain.com</code> под пользователем <code>lvas@example.com</code>. В качестве адреса сервера укажите <code>lvas@example.com@ipa.example.com</code>.</p>
+<p><img src="resources/putty_ipa.example.com_with_ipauser.png" alt="putty_ipa.example.com_with_ipauser" title="Putty подключение lvas@example.com@ipa.example.com"></p>
+<p>Подключение также должно пройти без запроса логина и пароля
+<img src="resources/Putty_lvas_example.com.png" alt="Putty: lvas@example.com" title="Putty подключение lvas@example.com@ipa.example.com"></p>
+<p>to do:</p>
+<p>Host Based Access Control – HBAC</p>
+<p>IdM Roles Management</p>
+<p>IdM Multi Master Replication</p>
+
+</body>
+</html>

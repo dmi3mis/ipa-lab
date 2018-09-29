@@ -1,0 +1,10 @@
+#!/bin/sh
+
+yum group install -y "Server with GUI"
+
+# try to fix man
+yum reinstall man man-db man-pages -y
+mandb -c
+
+systemctl set-default graphical.target
+systemctl isolate graphical.target

@@ -1,0 +1,28 @@
+#!/bin/sh
+
+
+grep -q CentOS /etc/redhat-release && RPMKEYURL="https://www.centos.org/keys/RPM-GPG-KEY-CentOS-7" \
+                                   || RPMKEYURL="https://www.redhat.com/security/fd431d51.txt"
+
+cat <<EOF >/etc/yum.repos.d/installmedia-dvd.repo
+[installmedia-dvd]
+name = Red Hat Local DVD Repository
+baseurl =ftp://172.25.0.254/pub/dvd
+enabled = 1
+gpgkey = $RPMKEYURL
+gpgcheck = 1
+cost = 50
+EOF
+
+
+yum install -y ipa-client chrony bash-completion bash-completion-extra
+systemctl enable chronyd
+systemctl start  chronyd
+
+while ! (echo > /dev/tcp/classroom/389) >/dev/null 2>&1; do
+    echo "ipa server not ready yet - waiting for 10s"
+    sleep 10
+done
+
+ipa-client-install --mkhomedir --enable-dns-updates --force-ntpd -p admin@EXAMPLE.COM --password='password' --force-join -U
+echo -n 'password' | kinit admin
