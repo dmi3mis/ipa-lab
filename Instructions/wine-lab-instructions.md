@@ -230,9 +230,11 @@ EOF
 ![firefox-google-2gisshell](resources/firefox_google_2gisshell.png "Firefox: Google - 2GISShell.exe")
 
 Запустим его установку в среде Wine
+
 ![wine-uninstaller-2gisshell.msi](resources/Wine_uninstall_2gisshell.png "Wine: uninstaller 2GISShell*.msi")
 
 ![wine_2gisshell_install](resources/wine_2gisshell_install.png "Wine: 2gisshell.msi install")
+
 Во времмя установки приложения установщик создал ярлык для запуска приложения.
 
 Запустим приложение и выберем город.
