@@ -12,22 +12,15 @@ Vagrant.configure("2") do |config|
   windomainname    = "domain.com"
   ipadomainname    = "example.com"
 
-
   config.vagrant.plugins = ["vagrant-vbguest", "vagrant-timezone", "vagrant-hosts", "vagrant-reload" ]
   config.timezone.value = :host
-
-
   
-  
-  # VM guest configuration
-  config.vm.box = "centos/7" # Use centos/7 or the label you used when adding the downloaded rhel box, for expl: rhel/7.2
-
-
   if ENV['VBOX_VM_PATH']
     vbox_vm_path = ENV['VBOX_VM_PATH']
   end
 
   config.vm.define :ipa do |ipa_config|
+    ipa_config.vm.box = "dmi3mis/centos7"  
     ipa_config.vm.hostname = "ipa.#{ipadomainname}"
     ipa_config.vm.network :private_network, ip:  ipa_ip
     ipa_config.vm.provision :shell, path: "scripts/default-provision"
@@ -45,6 +38,7 @@ Vagrant.configure("2") do |config|
   end
   
   config.vm.define :srv do |srv_config|
+    srv_config.vm.box = "dmi3mis/centos7"
     srv_config.vm.hostname = "srv.#{ipadomainname}"
     srv_config.vm.network :private_network, ip:  srv_ip
     srv_config.vm.provision :shell, path: "scripts/default-provision"
@@ -63,11 +57,11 @@ Vagrant.configure("2") do |config|
 	end
 
   config.vm.define :cl do |cl_config|
-    cl_config.vm.hostname = "cl1.#{ipadomainname}"
+    cl_config.vm.box = "dmi3mis/centos7_desktop"
+    cl_config.vm.hostname = "cl.#{ipadomainname}"
     cl_config.vm.network :private_network, ip:  cl1_ip
     cl_config.vm.provision :shell, path: "scripts/default-provision"
     cl_config.vm.provision :shell, path: "scripts/cl1-provision"
-    
     cl_config.vm.provider "virtualbox" do |vbox, override|
       vbox.cpus = 2
       vbox.memory = 4096
