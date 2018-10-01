@@ -73,7 +73,7 @@ Last login: Sun Sep 30 17:39:11 2018
 
 ### Задача 2: Установка поддержки репозиториев `wine32`. Установка пакетов для `wine.i686`
 
-Установим поддержку репозиториев wine32 и winetricks от hardbottle. Поставим пакеты `wine.i686` `winetricks`.
+Установим поддержку репозиториев wine32 и winetricks от harbottle. Поставим пакеты `wine.i686` `winetricks`.
 
 ```bash
 [vagrant@c7-client01 ~]$ sudo yum -y install https://harbottle.gitlab.io/wine32/7/i386/wine32-release.rpm
