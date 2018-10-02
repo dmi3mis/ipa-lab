@@ -1,3 +1,5 @@
+> Внимание! Инструкции к практическим занятиям находятся [вот тут рядом в папке Instructions](https://github.com/dmi3mis/ipa-lab/blob/master/Instructions/Readme.md)
+
 # ipa-lab
 
 ## Зачем?
@@ -63,5 +65,3 @@ Vagrant commands must be run from the "Vagrant" folder.
 * Resume the lab environment: `vagrant resume`
 
 ---
-
-Инструкцию к лабораторной работе по интеграции AD и IPA доменов вы можете найти в [Instructions](Instructions/readme.md) ""
