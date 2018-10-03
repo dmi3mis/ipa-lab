@@ -1891,7 +1891,6 @@ This may take some time, please wait ...
 domain.com.             3423    IN      SOA     dc.domain.com. hostmaster.domain.com. 53 900 600 86400 3600
 [vagrant@ipa ~]$ dig +noall +answer SRV _ldap._tcp.domain.com
 _ldap._tcp.domain.com.  600     IN      SRV     0 100 389 dc.domain.com.
-[vagrant@ipa ~]$ dig +noall +answer SRV dc.domain.com
 [vagrant@ipa ~]$ dig +noall +answer A dc.domain.com
 dc.domain.com.          3600    IN      A       172.25.0.100
 [vagrant@ipa ~]$ LDAPTLS_REQCERT=never ldapsearch -x -Z -D 'DOMAIN\administrator' \

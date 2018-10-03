@@ -196,7 +196,7 @@ Vagrant.configure("2") do |config|
     wincl_config.winrm.retry_limit = 20
     wincl_config.vm.network :private_network, ip: wincl_ip
     wincl_config.vm.provision "shell", path: "scripts/join-domain.ps1", privileged: true, args: "-ip '#{wincl_ip}' -domain '#{windomainname}' -dns '#{windc_ip}'"
-    wincl_config.vm.provision "shell", path: "scripts/re-enable-autologin.ps1", privileged: true
+    wincl_config.vm.provision "shell", path: "scripts/re-enable-autologin.ps1", privileged: true, args: "-domain '#{windomainname}'"
     wincl_config.vm.provision "shell", path: "scripts/MakeWindows10lookGreatAgain.ps1", privileged: true
     wincl_config.vm.provision "shell", path: "scripts/install-bginfo.ps1", privileged: false
     wincl_config.vm.provision "reload"

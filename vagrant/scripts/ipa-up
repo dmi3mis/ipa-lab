@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo -e "Configuring IPA & DNS server: /n"
+yum install -y bind bind-utils  bind-dyndb-ldap ipa-server ipa-server-dns
+
+yum install -y rng-tools
+rngd -r /dev/urandom
+
+# yum update -y
+ 
+ #nmcli conn modify System\ eth0 ipv4.ignore-auto-dns on
+ #nmcli conn up System\ eth0
+
+sed -i /.*ipa.*/d /etc/hosts
+echo "172.25.0.10 ipa.example.com ipa" >> /etc/hosts
+
+
+ipa-server-install \
+    --domain=example.com \
+    --realm=EXAMPLE.COM \
+    --ds-password=password \
+    --admin-password=password \
+    --hostname=ipa.example.com \
+    --ip-address=172.25.0.10 \
+    --reverse-zone=0.25.172.in-addr.arpa. \
+    --forwarder=8.8.8.8 \
+    --allow-zone-overlap \
+	--ssh-trust-dns \
+	--allow-zone-overlap \
+    --setup-dns \
+    --unattended
+
+nmcli connection modify 'System eth0' ipv4.ignore-auto-dns yes && nmcli connection up 'System eth0'
