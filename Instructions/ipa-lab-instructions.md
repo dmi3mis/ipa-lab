@@ -469,7 +469,7 @@ Added user "ppv"
 ```bash
 [vagrant@ipa ~]$ ipa user-add   --first=Larisa \
                                 --last=Vasileva \
-                                --manager=ppopov \
+                                --manager=ppv \
                                 --email=lvas@example.com \
                                 --homedir=/home/lvas lvas
 -----------------
