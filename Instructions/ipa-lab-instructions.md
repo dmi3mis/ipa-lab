@@ -203,7 +203,8 @@ ipa: INFO: The ipactl command was successful
 Проверим, что DNS PTR записи в обратной зоне dns `0.25.172.in-addr.apra` будут создаваться/обновляться при присоединении компьютеров.
 
 ```bash
-[vagrant@ipa ~]$  ipa dnszone-mod example.com --allow-sync-ptr=true
+[vagrant@ipa ~]$ kinit admin
+[vagrant@ipa ~]$ ipa dnszone-mod example.com --allow-sync-ptr=true
   Zone name: example.com.
   Active zone: TRUE
   Authoritative nameserver: ipa.example.com.
