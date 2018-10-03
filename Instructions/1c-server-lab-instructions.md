@@ -118,10 +118,6 @@ Connection to 127.0.0.1 closed.
 ```
 C:\VMs\ipa-lab\vagrant (master -> origin)
 λ vagrant ssh ipa
-Last login: Wed Oct  3 23:25:29 2018 from 10.0.2.2
-----------------------------------------------------------------
-  CentOS 7.5.1804                             built 2018-10-02
-----------------------------------------------------------------
 [vagrant@ipa ~]$ sudo -s
 [root@ipa vagrant]# su -
 
@@ -174,7 +170,7 @@ Configuring example.com as NIS domain.
 Client configuration complete.
 The ipa-client-install command was successful
 
-==============================================================================
+
 Setup complete
 
 Next steps:
@@ -216,7 +212,7 @@ This may take some time, please wait ...
   Record name: cl
   A record: 172.25.0.20
 [vagrant@ipa ~]$              
-
+```
 Откроем необходимые порты для FreeIPA сервера в firewalld
 
 ```less
@@ -251,10 +247,6 @@ dc.domain.com.          3600    IN      A       172.25.0.100
 ```
 C:\VMs\ipa-lab\vagrant (master -> origin)
 λ vagrant ssh cl
-Last login: Wed Oct  3 22:59:15 2018 from 10.0.2.2
-----------------------------------------------------------------
-  CentOS 7.5.1804                             built 2018-10-02
-----------------------------------------------------------------
 [vagrant@cl ~]$ sudo -s
 [root@cl vagrant]# nmcli connection modify 'System eth1' ipv4.dns 172.25.0.10 && nmcli connection up 'System eth1'
 Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/4)
@@ -274,9 +266,6 @@ ipa.example.com.        3600    IN      A       172.25.0.10
 [vagrant@cl ~]$ logout
 C:\VMs\ipa-lab\vagrant (master -> origin)
 λ vagrant ssh srv
-----------------------------------------------------------------
-  CentOS 7.5.1804                             built 2018-10-02
-----------------------------------------------------------------
 [vagrant@srv ~]$ sudo -s
 [root@srv vagrant]# nmcli connection modify 'System eth0' ipv4.ignore-auto-dns yes && nmcli connection up 'System eth0'
 Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/3)
@@ -343,7 +332,6 @@ dc.domain.com                                  A      3600  Answer     172.25.0.
 [127.0.0.1]: PS C:\Users\vagrant\Documents>
 ```
 
-
 ## Упражнение 2: Установка пакетов сервера и клиента Платформы 1С:Предприятие
 
 Теперь настала пора поставить сначала по отдельности клиентскую и серверные компоненты платформы.
@@ -352,7 +340,6 @@ dc.domain.com                                  A      3600  Answer     172.25.0.
 2. Установка клиента Платформы 1С:Предприятие на Linux и проверка её работы с демонстрационной базой
 3. Установка компонентов сервера Платформы 1С:Предприятие на Linux
 4. Установка и настройка СУБД для сервера Платформы 1С:Предприятие на Linux
-
 
 ### Задача 1: Установка клиента Платформы 1С:Предприятие на Windows 10 и проверка её работы с демонстрационной базой
 
@@ -385,10 +372,6 @@ dc.domain.com                                  A      3600  Answer     172.25.0.
 ```
 C:\VMs\ipa-lab\vagrant (master -> origin)
 λ vagrant ssh cl
-Last login: Thu Oct  4 01:32:36 2018
-----------------------------------------------------------------
-  CentOS 7.5.1804                             built 2018-10-02
-----------------------------------------------------------------
 [vagrant@cl ~]$ sudo ls -al /vagrant/
 total 21
 drwxrwxrwx.  1 vagrant vagrant  4096 Oct  3 21:34 .
@@ -442,18 +425,7 @@ drwxrwxrwx. 1 vagrant vagrant      4096 Oct  4 02:06 ..
 [vagrant@cl all]$
 
 [vagrant@cl all]$ sudo yum localinstall 1C_Enterprise83-*.rpm
-Loaded plugins: fastestmirror, langpacks
 ...
---> Running transaction check
----> Package libpng12.x86_64 0:1.2.50-10.el7 will be installed
---> Finished Dependency Resolution
-
-Dependencies Resolved
-
-==========================================================================================================================
-
- Package                         Arch        Version            Repository                                           Size ==========================================================================================================================
-
 Installing:
  1C_Enterprise83-client          x86_64      8.3.13-1513        /1C_Enterprise83-client-8.3.13-1513.x86_64          399 M  
  1C_Enterprise83-client-nls      x86_64      8.3.13-1513        /1C_Enterprise83-client-nls-8.3.13-1513.x86_64      189 M  
@@ -465,20 +437,7 @@ Installing:
  1C_Enterprise83-ws-nls          x86_64      8.3.13-1513        /1C_Enterprise83-ws-nls-8.3.13-1513.x86_64          135 k 
  Installing for dependencies:
  libpng12                        x86_64      1.2.50-10.el7      base                                                171 k
-
-Transaction Summary
-==========================================================================================================================
-
-Install  8 Packages (+1 Dependent package)
-
-Total size: 1.3 G
-Total download size: 171 k
-Installed size: 1.3 G
-Downloading packages:
-libpng12-1.2.50-10.el7.x86_64.rpm                                                                  | 171 kB  00:00:00
-
-Running transaction check
-.....
+...
 Installed:
   1C_Enterprise83-client.x86_64 0:8.3.13-1513               1C_Enterprise83-client-nls.x86_64 0:8.3.13-1513
   1C_Enterprise83-common.x86_64 0:8.3.13-1513               1C_Enterprise83-common-nls.x86_64 0:8.3.13-1513
@@ -499,99 +458,6 @@ Complete!
 [vagrant@cl haspd]$ wget ftp://download.etersoft.ru/pub/Etersoft/HASP/last/CentOS/7/haspd-modules-7.60-eter1centos.x86_64.rpm
 [vagrant@cl haspd]$ sudo yum localinstall *.rpm
 ...
---> Finished Dependency Resolution
-
-Dependencies Resolved
-
-==========================================================================================================================
-
- Package                   Arch          Version                    Repository                                       Size ==========================================================================================================================
-
-Installing:
- haspd                     x86_64        7.60-eter1centos           /haspd-7.60-eter1centos.x86_64                  3.9 M  
- haspd-debuginfo           x86_64        7.60-eter1centos           /haspd-debuginfo-7.60-eter1centos.x86_64        6.3 k  
- haspd-modules             x86_64        7.60-eter1centos           /haspd-modules-7.60-eter1centos.x86_64          188 k 
- Installing for dependencies:
- glibc                     i686          2.17-222.el7               base                                            4.2 M  
- nss-softokn-freebl        i686          3.36.0-5.el7_5             updates                                         211 k
-
-Transaction Summary
-==========================================================================================================================
-
-Install  3 Packages (+2 Dependent packages)
-
-Total size: 8.5 M
-Total download size: 4.5 M
-Installed size: 19 M
-Is this ok [y/d/N]: y
-Downloading packages:
-(1/2): nss-softokn-freebl-3.36.0-5.el7_5.i686.rpm                                                  | 211 kB  00:00:00
-
-(2/2): glibc-2.17-222.el7.i686.rpm             69% [=========================           ]  0.0 B/s | 3.1 MB  --:--:-- ETA (2/2): glibc-2.17-222.el7.i686.rpm                                                                 | 4.2 MB  00:00:00
-
---------------------------------------------------------------------------------------------------------------------------
-
-Total                                                                                     7.5 MB/s | 4.5 MB  00:00:00
-
-Running transaction check
-Running transaction test
-Transaction test succeeded
-Running transaction
-  Installing : haspd-debuginfo-7.60-eter1centos.x86_64                                                                1/5
-  Installing : glibc-2.17-222.el7.i686                                                                                2/5
-  Installing : nss-softokn-freebl-3.36.0-5.el7_5.i686                                                                 3/5
-  Installing : haspd-7.60-eter1centos.x86_64                                                                          4/5
-Loading HASP LPT kernel module... aksparlnx is not found
-you can try compile it with 'service haspd build' command.              [FAILED]
-Note: This kernel module needed ONLY for LPT HASP keys
-
-Check kernel for CONFIG_USB_DEVICEFS...                                 [PASSED]
-Enable workaround for /proc/bus/usb (bind from /dev/bus/usb)            [ DONE ]
-                                                                        [ DONE ]
-Running aksusbd...                                                      [ DONE ]
-Running winehasp...                                                     [ DONE ]
-Running hasplm...                                                       [ DONE ]
-Running hasplmd...                                                      [ DONE ]
-  Installing : haspd-modules-7.60-eter1centos.x86_64                                                                  5/5
-
-Stopping hasplmd... .                                                   [ DONE ]
-Stopping hasplm...                                                      [ DONE ]
-Stopping winehasp...                                                    [ DONE ]
-Stopping aksusbd...                                                     [ DONE ]
-Stopping skeyd...                                                       [PASSED]
-Stopping usbsentinel...                                                 [PASSED]
-Stopping SntlKeysSrvrlnx...                                             [PASSED]
-Stopping workaround for /proc/bus/usb                                   [ DONE ]
-Unloading HASP LPT kernel module...                                     [PASSED]
-Loading HASP LPT kernel module... aksparlnx is not found
-you can try compile it with 'service haspd build' command.              [FAILED]
-Note: This kernel module needed ONLY for LPT HASP keys
-
-Check kernel for CONFIG_USB_DEVICEFS...                                 [PASSED]
-Enable workaround for /proc/bus/usb (bind from /dev/bus/usb)            [ DONE ]
-                                                                        [ DONE ]
-Running aksusbd...                                                      [ DONE ]
-Running winehasp...                                                     [ DONE ]
-Running hasplm...                                                       [ DONE ]
-Running hasplmd...                                                      [ DONE ]
-  Verifying  : haspd-7.60-eter1centos.x86_64                                                                          1/5
-
-  Verifying  : nss-softokn-freebl-3.36.0-5.el7_5.i686                                                                 2/5
-
-  Verifying  : glibc-2.17-222.el7.i686                                                                                3/5
-
-  Verifying  : haspd-modules-7.60-eter1centos.x86_64                                                                  4/5
-
-  Verifying  : haspd-debuginfo-7.60-eter1centos.x86_64                                                                5/5
-
-
-Installed:
-  haspd.x86_64 0:7.60-eter1centos   haspd-debuginfo.x86_64 0:7.60-eter1centos   haspd-modules.x86_64 0:7.60-eter1centos
-
-Dependency Installed:
-  glibc.i686 0:2.17-222.el7                            nss-softokn-freebl.i686 0:3.36.0-5.el7_5
-
-Complete!
 [vagrant@cl haspd]$
 [vagrant@cl haspd]$ sudo service haspd build
 ...
@@ -621,62 +487,15 @@ aksparlnx.ko installed into /lib/modules/3.10.0-862.14.4.el7.x86_64/kernel/extra
 
 Поставим СУБД на сервер. Подключим репозиторий и поставим и преднастроим СУБД.
 
-https://postgrespro.ru/products/1c
+<https://postgrespro.ru/products/1c>
 
-https://postgrespro.ru/products/1c_build
+<https://postgrespro.ru/products/1c_build>
 
 ```
 C:\VMs\ipa-lab\vagrant (master -> origin)
 λ vagrant ssh srv
 [vagrant@srv ~]$ sudo rpm -ivh http://1c.postgrespro.ru/keys/postgrespro-1c-centos96.noarch.rpm && sudo yum makecache && sudo yum install postgresql-pro-1c-9.6
 ...
---> Finished Dependency Resolution
-
-Dependencies Resolved
-
-==========================================================================================================================
-
- Package                            Arch                 Version                       Repository                    Size ==========================================================================================================================
-
-Installing:
- postgresql96-server                x86_64               9.6.10-1.1C                   postgrespro-1c               4.6 M 
- Installing for dependencies:
- libicu                             x86_64               50.1.2-15.el7                 base                         6.9 M  
- libicu-devel                       x86_64               50.1.2-15.el7                 base                         702 k  
- libxslt                            x86_64               1.1.28-5.el7                  base                         242 k  
- postgresql96                       x86_64               9.6.10-1.1C                   postgrespro-1c               1.4 M  
- postgresql96-contrib               x86_64               9.6.10-1.1C                   postgrespro-1c               587 k  
- postgresql96-libs                  x86_64               9.6.10-1.1C                   postgrespro-1c               316 k
-
-Transaction Summary
-==========================================================================================================================
-
-Install  1 Package (+6 Dependent packages)
-
-Total download size: 15 M
-Installed size: 58 M
-Is this ok [y/d/N]:y
-Total                                                                                     6.7 MB/s |  15 MB  00:00:02
-...
-Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-POSTGRESPRO-1C-96
-Importing GPG key 0x2D2DF0B4:
- Userid     : "Robot (Signing repos) <dba@postgrespro.ru>"
- Fingerprint: ae12 bb39 29e6 2b65 b5d7 f0c0 7f9a e5a6 2d2d f0b4
- Package    : postgrespro-1c-centos96-9.6-1.noarch (installed)
- From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-POSTGRESPRO-1C-96
-Is this ok [y/N]:y
-...
-Installed:
-  postgresql96-server.x86_64 0:9.6.10-1.1C
-
-
-Dependency Installed:
-  libicu.x86_64 0:50.1.2-15.el7       libicu-devel.x86_64 0:50.1.2-15.el7         libxslt.x86_64 0:1.1.28-5.el7
-
-  postgresql96.x86_64 0:9.6.10-1.1C   postgresql96-contrib.x86_64 0:9.6.10-1.1C   postgresql96-libs.x86_64 0:9.6.10-1.1C
-
-
-Complete!
 [vagrant@srv ~]$
 ```
 
@@ -881,14 +700,6 @@ drwxrwxrwx. 1 vagrant vagrant      4096 Oct  4 02:10 ..
 [root@srv all]# yum localinstall *.rpm
 Loaded plugins: fastestmirror
 ...
---> Finished Dependency Resolution
-
-Dependencies Resolved
-
-======================================================================================================================
-
- Package                        Arch       Version           Repository                                          Size ======================================================================================================================
-
 Installing:
  1C_Enterprise83-common         x86_64     8.3.13-1513       /1C_Enterprise83-common-8.3.13-1513.x86_64          79 M  
  1C_Enterprise83-common-nls     x86_64     8.3.13-1513       /1C_Enterprise83-common-nls-8.3.13-1513.x86_64      11 M  
@@ -896,15 +707,6 @@ Installing:
  1C_Enterprise83-server-nls     x86_64     8.3.13-1513       /1C_Enterprise83-server-nls-8.3.13-1513.x86_64     172 M  
  1C_Enterprise83-ws             x86_64     8.3.13-1513       /1C_Enterprise83-ws-8.3.13-1513.x86_64             530 k  
  1C_Enterprise83-ws-nls         x86_64     8.3.13-1513       /1C_Enterprise83-ws-nls-8.3.13-1513.x86_64         135 k
-
-Transaction Summary
-======================================================================================================================
-
-Install  6 Packages
-
-Total size: 722 M
-Installed size: 722 M
-Is this ok [y/d/N]:y
 ...
 Installed:
   1C_Enterprise83-common.x86_64 0:8.3.13-1513             1C_Enterprise83-common-nls.x86_64 0:8.3.13-1513
@@ -939,7 +741,7 @@ srv1cv83.service is not a native service, redirecting to /sbin/chkconfig.
 Executing /sbin/chkconfig srv1cv83 on
 [root@srv all]# systemctl start srv1cv83
 [root@srv all]# systemctl status srv1cv83
-● srv1cv83.service - SYSV: Starts and stops the 1C:Enterprise daemons
+  srv1cv83.service - SYSV: Starts and stops the 1C:Enterprise daemons
    Loaded: loaded (/etc/rc.d/init.d/srv1cv83; bad; vendor preset: disabled)
    Active: active (exited) since Thu 2018-10-04 04:12:16 +07; 20s ago
      Docs: man:systemd-sysv-generator(8)
@@ -987,7 +789,7 @@ systemctl restart srv1cv83.service
 [root@srv all]# systemctl stop srv1cv83
 [root@srv all]# systemctl start srv1cv83
 [root@srv all]# systemctl status srv1cv83
-● srv1cv83.service - SYSV: Starts and stops the 1C:Enterprise daemons
+  srv1cv83.service - SYSV: Starts and stops the 1C:Enterprise daemons
    Loaded: loaded (/etc/rc.d/init.d/srv1cv83; bad; vendor preset: disabled)
    Active: active (exited) since Thu 2018-10-04 04:17:04 +07; 4s ago
      Docs: man:systemd-sysv-generator(8)
@@ -1048,17 +850,16 @@ Oct 04 04:17:04 srv.example.com systemd[1]: Started SYSV: Starts and stops the 1
         -descriptor vrdPath: путь к существующему vrd файлу
         -connstr connStr: строка соединения ИБ
         -confPath confPath: полный путь к конфигурационному файлу Apache
+
 [vagrant@srv x86_64]$ sudo ./webinst -publish -apache24 -wsdir demo -dir '/var/www/html/demo/' -connstr 'Srvr="srv.example.com:1542";Ref="te st-base"' -confPath /etc/httpd/conf/httpd.conf
 
 Publication successful
-
-```
 [vagrant@srv ~]$ sudo -s
 [root@srv vagrant]# systemctl enable httpd
 Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service.
 [root@srv vagrant]# systemctl start httpd
 [root@srv vagrant]# systemctl status httpd
-● httpd.service - The Apache HTTP Server
+  httpd.service - The Apache HTTP Server
    Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; vendor preset: disabled)
    Active: active (running) since Thu 2018-10-04 06:01:29 +07; 5s ago
      Docs: man:httpd(8)
@@ -1080,10 +881,10 @@ Oct 04 06:01:29 srv.example.com systemd[1]: Started The Apache HTTP Server.
 [vagrant@srv ~]$ firewall-cmd --reload
 
 ```
+
 Сервер 1С:Предприятие поставлен.
 
-
-## Упражнение 3: Настройка сервера 1С посредством консоли администрирования
+## Упражнение 3: Настройка сервера 1С посредством консоли администрирования и проверка клиентами
 
 Переключимся на Windows10 рабочую станцию `wincl.domain.com`. И запустим утилиту администрирования серверов Платформы 1С:Предприятия.
 
@@ -1118,6 +919,8 @@ Oct 04 06:01:29 srv.example.com systemd[1]: Started The Apache HTTP Server.
 
 При необходимости можно отметить пункт «Создать базу с случае ее отсутствия»
 
+
+
 ![1C_mmcadmin_new_database](resources/1C_mmcadmin_new_database.png "Администратор Серверов: Создание базы в кластере srv.example.com")
 Администратор Серверов: Создание базы в кластере srv.example.com
 
@@ -1126,6 +929,3 @@ Oct 04 06:01:29 srv.example.com systemd[1]: Started The Apache HTTP Server.
 
 ![1C_winclient_opened_DB_with_Weи](resources/1C_winclient_opened_DB_with_Web.png "Подключение к серверу из Windows: Открыта Демо база и работает веб клиент")
 Подключение к серверу из Windows: Открыта Демо база и работает веб клиент
-
-
-
