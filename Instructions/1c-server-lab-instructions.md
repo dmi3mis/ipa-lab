@@ -927,5 +927,10 @@ Oct 04 06:01:29 srv.example.com systemd[1]: Started The Apache HTTP Server.
 ![1C_winclient](resources/1C_winclient.png "Подключение к серверу из Windows Сервер: srv.example.com База: Base1")
 Подключение к серверу из Windows. Сервер: srv.example.com База: Base1
 
-![1C_winclient_opened_DB_with_Weи](resources/1C_winclient_opened_DB_with_Web.png "Подключение к серверу из Windows: Открыта Демо база и работает веб клиент")
-Подключение к серверу из Windows: Открыта Демо база и работает веб клиент
+![1C_winclient_opened_DB_with_Weи](resources/1C_winclient_opened_DB_with_Web.png "Подключение к 1С:Предприятие Windows клиентом: Открыта Демо база и работает веб клиент")
+Подключение к 1С:Предприятие Windows клиентом: Открыта Демо база и работает веб клиент
+
+![1C_LinuxClientt_opened_DB_with_Web](resources/1C_LinuxClientt_opened_DB_with_Web.png "1С:Предприятие Linux клиент: Открыта Демо база и работает веб клиент")
+
+
+Подключение к 1С:Предприятие Linux клиент: Открыта Демо база и работает веб клиент
