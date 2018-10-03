@@ -5,9 +5,10 @@ Vagrant.configure("2") do |config|
 
   windc_ip     = "172.25.0.100"
   wincl_ip     = "172.25.0.120"
+  #winsrv_ip    = "172.25.0.130"
   ipa_ip       = "172.25.0.10"
   srv_ip       = "172.25.0.11"
-  cl1_ip       = "172.25.0.20"
+  cl_ip        = "172.25.0.20"
  
   windomainname    = "domain.com"
   ipadomainname    = "example.com"
@@ -59,7 +60,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :cl do |cl_config|
     cl_config.vm.box = "dmi3mis/centos7_desktop"
     cl_config.vm.hostname = "cl.#{ipadomainname}"
-    cl_config.vm.network :private_network, ip:  cl1_ip
+    cl_config.vm.network :private_network, ip:  cl_ip
     cl_config.vm.provision :shell, path: "scripts/default-provision"
     cl_config.vm.provision :shell, path: "scripts/cl-provision"
     cl_config.vm.provider "virtualbox" do |vbox, override|
@@ -127,7 +128,7 @@ Vagrant.configure("2") do |config|
 
   end
 
-  #   config.vm.define "winsrv" do |winsrv_config|
+  # config.vm.define "winsrv" do |winsrv_config|
   #   winsrv_config.vm.box = "dmi3mis/Server_2016"
   #   winsrv_config.vm.hostname = "winsrv"
   #   winsrv_config.vm.boot_timeout = 600
