@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>wine-lab-instructions.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="wine-%D1%81%D1%80%D0%B5%D0%B4%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85-windows-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BD%D0%B0-gnulinux">WINE: среда для запуска классических Windows приложений на GNU/Linux</h1>
+<p>Отделу технического сопровождения в компании &quot;РиК&quot; была поставлена задача импортозамещения программного обеспечения на рабочих станциях пользователей. Первым шагом в этой задачи был поставлен отказ от зарубежной Операционной Системы Microsoft Windows. Предлагается рассмотреть возможность переноса пользовательских компьютеров и их рабочей среды на GNU/Linux. Для переноса на GNU/Linux программ, изначально hfpработаюших в Windows предлагается использовать проект Wine. Вам предлагается настроить среду для запуска классических Win32 приложений в GNU/Linux.</p>
+<p>По окончанию данной лабораторной работы вы сможете:</p>
+<ul>
+<li>Установить и настроить Wine на CentOS 7.</li>
+<li>Установить и запустить классическое Win32 приложение в GNU/Linux.</li>
+<li>Решать проблемы, связанные с запуском и правильной работой классических WIN32 API приложений в GNU/Linux.</li>
+</ul>
+<p>Оглавление</p>
+<!-- TOC -->
+<ul>
+<li><a href="#wine-%D1%81%D1%80%D0%B5%D0%B4%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B0%D1%81%D1%81%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D1%85-windows-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9-%D0%BD%D0%B0-gnulinux">WINE: среда для запуска классических Windows приложений на GNU/Linux</a>
+<ul>
+<li><a href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-1-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BF%D1%80%D0%B5%D0%B4%D0%B2%D0%B0%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-wine">Упражнение 1: Установка и предварительная настройка Wine</a>
+<ul>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B8-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F-epel-%D0%B8-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-winex86_64">Задача 1: Установка поддержки репозитория <code>EPEL</code> и установка <code>wine.x86_64</code></a></li>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B8-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B5%D0%B2-wine32-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2-%D0%B4%D0%BB%D1%8F-winei686">Задача 2: Установка поддержки репозиториев <code>wine32</code>. Установка пакетов для <code>wine.i686</code></a></li>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-3-%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D0%B9-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-wine-%D0%B8-%D0%BF%D1%80%D0%B5%D0%B4%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0">Задача 3: Первый запуск wine и преднастройка</a></li>
+</ul>
+</li>
+<li><a href="#%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-2-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D0%B8-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9">Упражнение 2: Загрузка и установка приложений</a>
+<ul>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8%D0%B7-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%B0%D0%B3%D0%B0%D0%B5%D0%BC%D1%8B%D1%85-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%BC-winetricks">Задача 1: Установка приложения из списка предлагаемых скриптом winetricks</a></li>
+<li><a href="#%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D0%B8%D0%B7-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-win32-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-wine">Задача 2: Загрузка из интернет, установка и запуск Win32 приложения в Wine</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<p>Описание тестовой среды</p>
+<p><img src="resources/lab.png" alt="lab" title="Схема тестовой среды"></p>
+<p>Предположительное время: 30 минут</p>
+<p>Виртуальные машины: ipa.example.com cl.example.com</p>
+<table>
+<thead>
+<tr>
+<th>Логин</th>
+<th>Пароль</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>root</td>
+<td>redhat</td>
+</tr>
+<tr>
+<td>vagrant</td>
+<td>vagrant</td>
+</tr>
+</tbody>
+</table>
+<h2 id="%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-1-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%BF%D1%80%D0%B5%D0%B4%D0%B2%D0%B0%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-wine">Упражнение 1: Установка и предварительная настройка Wine</h2>
+<p>В данный момент в компании &quot;РиК&quot; не установлены необходимые пакеты, включающие поддержку wine. Необходимо произвести их установку и предварительную настройку.</p>
+<ol>
+<li>Установка поддержки репозитория <code>EPEL</code> и установка <code>wine.x86_64</code></li>
+<li>Установка поддержки репозитория <code>wine32</code>. Установка пакетов для <code>wine.i686</code></li>
+<li>Первый запуск wine и преднастройка</li>
+</ol>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B8-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D1%8F-epel-%D0%B8-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-winex8664">Задача 1: Установка поддержки репозитория <code>EPEL</code> и установка <code>wine.x86_64</code></h3>
+<p>Запустите терминал на хосте виртуализации получите доступ к терминалу машины <code>cl.example.com</code></p>
+<pre class="hljs"><code><div>λ <span class="hljs-built_in">cd</span> c:\VMs\ipa-lab
+λ vagrant ssh cl
+λ vagrant ssh c7-client01
+Last login: Sun Sep 30 17:39:11 2018
+----------------------------------------------------------------
+  CentOS 7.5.1804                             built 2018-09-30
+----------------------------------------------------------------
+[vagrant@c7-client01 ~]$
+</div></code></pre>
+<p>Установим поддержку репозитория EPEL и поставим оттуда пакеты wine</p>
+<pre class="hljs"><code><div>[vagrant@c7-client01 ~]$ sudo yum -y install epel-release
+....
+[vagrant@c7-client01 ~]$ sudo yum -y install wine\*
+...
+</div></code></pre>
+<blockquote>
+<p>Вот и всё! Уже можно проверять запуск приложений!
+Но у нас пока ещё нет поддержки запуска x32 приложений, давайте её добавим.</p>
+</blockquote>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B8-%D1%80%D0%B5%D0%BF%D0%BE%D0%B7%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B5%D0%B2-wine32-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D0%B0%D0%BA%D0%B5%D1%82%D0%BE%D0%B2-%D0%B4%D0%BB%D1%8F-winei686">Задача 2: Установка поддержки репозиториев <code>wine32</code>. Установка пакетов для <code>wine.i686</code></h3>
+<p>Установим поддержку репозиториев wine32 и winetricks от harbottle. Поставим пакеты <code>wine.i686</code> <code>winetricks</code>.</p>
+<pre class="hljs"><code><div>[vagrant@c7-client01 ~]$ sudo yum -y install https://harbottle.gitlab.io/wine32/7/i386/wine32-release.rpm
+....
+</div></code></pre>
+<p>Поставим пакет <code>wine.i686</code>,во время установки загрузится и установится ставится много пакетов i686 архитектуры ввиду требований удовлетворения зависимостей, придётся пару минут подождать.</p>
+<pre class="hljs"><code><div>[vagrant@c7-client01 ~]$ sudo yum -y install wine.i686
+...
+</div></code></pre>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-3-%D0%BF%D0%B5%D1%80%D0%B2%D1%8B%D0%B9-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-wine-%D0%B8-%D0%BF%D1%80%D0%B5%D0%B4%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0">Задача 3: Первый запуск wine и преднастройка</h3>
+<p>Проверим, что wine.i686 работает, запустим программы из стандартного набора.</p>
+<p>Зайдите под пользователем <code>student</code> c паролем <code>student</code> в графическую среду <code>GNOME 3 Desktop Enviroment</code>. В gnome-terminal дайте команду <code>alternatives --display wine</code></p>
+<pre class="hljs"><code><div>[vagrant@c7-client01 ~]$ alternatives --display wine
+wine - status is auto.
+ link currently points to /usr/bin/wine32
+/usr/bin/wine64 - priority 10
+ slave wine-preloader: /usr/bin/wine64-preloader
+/usr/bin/wine32 - priority 20
+ slave wine-preloader: /usr/bin/wine32-preloader
+Current `best` version is /usr/bin/wine32.
+</div></code></pre>
+<p>Обратите внимание, что при установленном в системе пакете <code>wine.i686</code> именно 32 битная версия будет запускаться по умолчанию по вызове команды <code>wine</code>.</p>
+<p>Запустите программу wineboot из меню приложений, запустим среду.</p>
+<p><img src="resources/wine_boot.png" alt="wine-boot" title="Первый запуск Wine через меню приложений в GNOME 3"></p>
+<p>В диалоговых окнах c запросом загрузки и установки приложений &quot;Wine Mono Installer&quot; и &quot;Wine Gecko Installer&quot; нажмите <code>Install</code></p>
+<blockquote>
+<p>Описание пакетов Gecko Mono
+https://wiki.winehq.org/Gecko - Wine реализация &quot;Internet Explorer&quot;
+https://wiki.winehq.org/Mono - Открытый проект по реализации &quot;.Net Fremework&quot;</p>
+</blockquote>
+<p>Теперь вы можете запустить стандартные приложения, идущие в комплекте через раздел меню приложений <code>Wine</code></p>
+<p><img src="resources/wine_standart_programs.png" alt="wine-standart-programs" title="Wine: Приложения, идущие в комплекте с пакетом"></p>
+<p>Мы проверили, что <code>wine</code> работает, по крайней мере он может запускать WIN32 приложения, поставляемые вместе с пакетом <code>wine</code>.</p>
+<p>Запустим программу настройки приложения через меню Applications -&gt; Wine -&gt; Wine Configuration</p>
+<p><img src="resources/wine_config.png" alt="wine-config" title="Wine: Окно настройки"></p>
+<p>В этом окне мы можем выполнить базовую настройку приложения.</p>
+<p>Установите версию Windows в Windows 10. В закладке Application -&gt; Windows Version -&gt;  Windows 10</p>
+<p><img src="resources/wine_windows_version.png" alt="wine-windows-version" title="Wine: Выбор версии Windows"></p>
+<h2 id="%D1%83%D0%BF%D1%80%D0%B0%D0%B6%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5-2-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D0%B8-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B9">Упражнение 2: Загрузка и установка приложений</h2>
+<p>Теперь, когда среда запуска поставлена, и проверена  пришло время проверить работу Win32 API приложений на CentOS 7 с установленной средой рабочего стола GNOME 3.</p>
+<ol>
+<li>Установка приложения из списка предлагаемых скриптом winetricks</li>
+<li>Загрузка из интернет, установка и запуск Win32 приложения в Wine</li>
+</ol>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-1-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8%D0%B7-%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B0-%D0%BF%D1%80%D0%B5%D0%B4%D0%BB%D0%B0%D0%B3%D0%B0%D0%B5%D0%BC%D1%8B%D1%85-%D1%81%D0%BA%D1%80%D0%B8%D0%BF%D1%82%D0%BE%D0%BC-winetricks">Задача 1: Установка приложения из списка предлагаемых скриптом winetricks</h3>
+<p>Зайдите под пользователем <code>student</code> c паролем <code>student</code> в графическую среду <code>GNOME 3 Desktop Enviroment</code>. В программе <code>gnome-terminal</code> запустите скрипт winetricks</p>
+<pre class="hljs"><code><div>
+[vagrant@c7-client01 ~]$ sudo yum -y install epel-release <span class="hljs-comment"># нет необходимости, если репозиторый EPEL уже добавлен</span>
+[vagrant@c7-client01 ~]$ sudo yum -y install https://harbottle.gitlab.io/harbottle-main/7/x86_64/harbottle-main-release.rpm
+[vagrant@c7-client01 ~]$ sudo yum -y install winetricks
+[vagrant@c7-client01 ~]$ WINEPREFIX=~/.wine32 winetricks -q
+
+</div></code></pre>
+<p>Поставить <code>winetrick</code> можно и по другому</p>
+<p>Обновлённый скрипт <code>winetricks</code> можно загрузить с оффициального сайта https://github.com/Winetricks/winetricks, файл сделать запускаемым и положить в один из каталогов PATH</p>
+<p>Например</p>
+<pre class="hljs"><code><div>[vagrant@c7-client01 ~]$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$PATH</span>
+[vagrant@c7-client01 ~]$ mkdir ~/bin
+[vagrant@c7-client01 bin]$ <span class="hljs-built_in">cd</span> bin
+[vagrant@c7-client01 bin]$ wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+[vagrant@c7-client01 bin]$ chmod +x winetricks
+[vagrant@c7-client01 ~]$ <span class="hljs-built_in">cd</span> -
+</div></code></pre>
+<p>Теперь инициализируем среду для запуска Win32 приложений</p>
+<pre class="hljs"><code><div>[vagrant@c7-client01 ~]$ WINEARCH=win32 WINEPREFIX=~/.wine32 wineboot
+</div></code></pre>
+<p>В диалоговых окнах c запросом загрузки и установки приложений &quot;Wine Mono Installer&quot; и &quot;Wine Gecko Installer&quot; нажмите <code>Install</code></p>
+<blockquote>
+<p>Описание пакетов Gecko Mono</p>
+<p>https://wiki.winehq.org/Gecko - Wine реализация &quot;Internet Explorer&quot;</p>
+<p>https://wiki.winehq.org/Mono - Открытый проект по реализации &quot;.Net Fremework&quot;</p>
+</blockquote>
+<p><img src="resources/wine_boot.png" alt="wine-boot" title="Первый запуск Wine через меню приложений в GNOME 3"></p>
+<p>Запустим <code>winetricks</code> внутри Win32 среды для запуска приложений <code>WINEPREFIX=~/.wine32</code> и выберем установку приложения <code>mspaint</code>. Для подавления дополнительных предупреждений используем ключ <code>-q</code>.</p>
+<pre class="hljs"><code><div>[vagrant@c7-client01 ~]$ WINEARCH=win32 WINEPREFIX=~/.wine32 winetricks -q
+</div></code></pre>
+<p>В появившемся окне &quot;Winetricks - choose a wineprrefix&quot;  выберем <code>Install an Application -&gt; mspaint</code></p>
+<blockquote>
+<p>В окне сбора статистики о запуске приложений примите решение и выберите ответ, будете ли вы отправлять разработчикам данные о запуске ваших приложений.</p>
+</blockquote>
+<p>В окне winetricks с сообщением <code>Working around wine bug 657 -- Native mspaint.exe from XP reqires mfc42.dll</code> нажмите <code>OK</code>.
+В окне <code>VCRedist Installation</code> нажмите <code>Ja</code>.</p>
+<blockquote>
+<p>В случае появления сообщения <code>Cannot find cabextract</code></p>
+<p>закройте окно, поставьте пакет <code>cabextract</code> и повторите запуск <code>winetricks</code></p>
+</blockquote>
+<pre class="hljs"><code><div>[vagrant@c7-client01 ~]$ yum install -y cabextract
+</div></code></pre>
+<p>Закроем окно winetricks и запустим <code>mspaint</code>, сделаем для него ярлык на рабочий стол</p>
+<pre class="hljs"><code><div>[vagrant@c7-client01 ~]$ WINEARCH=win32 WINEPREFIX=~/.wine32 wine mspaint
+</div></code></pre>
+<p><img src="resources/wine_mspaint.png" alt="wine-mspaint" title="Wine: Программа mspaint"></p>
+<p>Создадим ярлык для запуска приложения на рабочем столе GNOME 3</p>
+<pre class="hljs"><code><div>[vagrant@c7-client01 ~]$ <span class="hljs-built_in">cd</span> ~
+[vagrant@c7-client01 ~]$ cat &lt;&lt;EOF &gt;Desktop/wine-mspaint.desktop
+[Desktop Entry]
+Name=MS Paint
+Comment=Image Editor
+Exec=sh -c <span class="hljs-string">"WINEARCH=win32 WINEPREFIX=~/.wine32 wine 'C:\Windows\mspaint.exe'"</span>
+Icon=mspaint
+Terminal=<span class="hljs-literal">false</span>
+Type=Application
+Categories=X-Wine;
+X-Desktop-File-Install-Version=0.23
+EOF
+[vagrant@c7-client01 ~]$ chmod +x Desktop/wine-mspaint.desktop
+</div></code></pre>
+<p>Запустим программу через ярлык на рабочем столе.
+Ура! Программа <code>mspaint</code> запущена и работает в Wine!</p>
+<h3 id="%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B0-2-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%BA%D0%B0-%D0%B8%D0%B7-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-%D0%B8-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-win32-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B2-wine">Задача 2: Загрузка из интернет, установка и запуск Win32 приложения в Wine</h3>
+<p>Загрузим сторонее Win32 приложение из интернета с помощью браузера Firefox</p>
+<p><img src="resources/firefox_google_2gisshell.png" alt="firefox-google-2gisshell" title="Firefox: Google - 2GISShell.exe"></p>
+<p>Запустим его установку в среде Wine</p>
+<p><img src="resources/Wine_uninstall_2gisshell.png" alt="wine-uninstaller-2gisshell.msi" title="Wine: uninstaller 2GISShell*.msi"></p>
+<p><img src="resources/wine_2gisshell_install.png" alt="wine_2gisshell_install" title="Wine: 2gisshell.msi install"></p>
+<p>Во время установки приложения установщик создал ярлык для запуска приложения.</p>
+<p>Запустим приложение и выберем город.</p>
+<p><img src="resources/2gisshell_city_download.png" alt="2gisshell-city-download" title="Wine: 2gisshell city download"></p>
+<p>Теперь можно запускать приложение с ярлыка на рабочем столе.</p>
+<p><img src="resources/2gis_working.png" alt="2gisshell-city-working" title="Wine: 2gisshell city working"></p>
+<p>Приложение работает.</p>
+<p>Ура! Мы выполнили все упражнения!
+Теперь, по желанию, вы можете загрузить и попробовать поставить какое-либо другое ваше часто используемое приложение! Счастливого пути!</p>
+
+</body>
+</html>
