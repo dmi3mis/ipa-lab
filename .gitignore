@@ -1,6 +1,7 @@
 *.box
 !.gitignore
-Packer/packer_cache
-Packer/packer_cache/*.iso
-Packer/*.box
+Packer_centos/packer_cache/*.iso
+Packer_windows/packer_cache/*.iso
+Packer_centos/*.box
+
 vagrant/distrib/*
