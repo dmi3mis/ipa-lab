@@ -15,12 +15,13 @@
 
 Описание используемых образов виртуальных машин:
 
- Операционная Система            |Название образа          | Версия | Среда виртуализации | Размер
----------------------------------|-------------------------|--------|---------------------|--------
- Microsoft Windows Server 2016   | dmi3mis/Server_2016     | 180902           |Oracle Virtualbox  | 7.28 GB
- Microsoft Windows 10 Enterprise | dmi3mis/Windows_10      | 180931           |Oracle Virtualbox  | 5.37 GB
- Centos 7.5.1804                 | dmi3mis/centos7         | 1804.20181002    | Oracle Virtualbox | 488 MB
- Centos 7.5.1804                 | dmi3mis/centos7_desktop | 1804.20181003    | Oracle Virtualbox | 1.41 GB
+ Операционная Система            |Название образа          |           Версия | Среда виртуализации | Размер
+---------------------------------|-------------------------|------------------|---------------------|--------
+ Microsoft Windows Server 2016   | dmi3mis/Server_2016     | 180902           | Oracle Virtualbox   | 7.28 GB
+ Microsoft Windows 10 Enterprise | dmi3mis/Windows_10      | 180931           | Oracle Virtualbox   | 5.37 GB
+ Centos 7.5.1804                 | dmi3mis/centos7         | 1804.20181002    | Oracle Virtualbox   |  488 MB
+ Centos 7.5.1804                 | dmi3mis/centos7_desktop | 1804.20181003    | Oracle Virtualbox   | 1.41 GB
+
 Суммарный размер образов: 14.55 GB
 
 ## Аппаратные требования
@@ -40,9 +41,11 @@
 
 Как запустить среду?
 
-1. git clone https://github.com/dmi3mis/ipa-lab
-2. Перейдите в каталог с файлом `Vagrantfile` `cd ipa-lab/vagrant`
-3. Запустите создание среды командой `vagrant up`.
+```bash
+git clone https://github.com/dmi3mis/ipa-lab
+cd ipa-lab/vagrant
+vagrant up --provider=virtualbox
+```
 
 
 ## Basic Vagrant Usage
