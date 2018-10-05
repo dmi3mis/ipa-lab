@@ -47,8 +47,8 @@ cd ipa-lab/vagrant
 vagrant up --provider=virtualbox
 ```
 
-
 ## Basic Vagrant Usage
+
 Vagrant commands must be run from the "Vagrant" folder.
 
 * Bring up all Detection Lab hosts: `vagrant up` (optional `--provider=[virtualbox|vmware_desktop]`)
@@ -64,4 +64,4 @@ Vagrant commands must be run from the "Vagrant" folder.
 
 ---
 
-> Внимание! Инструкции к практическим занятиям находятся. [вот тут рядом в папке Instructions](https://github.com/dmi3mis/ipa-lab/blob/master/Instructions/Readme.md)
+> Внимание! Инструкции к практическим занятиям находятся в разделе [Instructions](https://github.com/dmi3mis/ipa-lab/blob/master/Instructions/Readme.md)
