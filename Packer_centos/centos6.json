@@ -1,0 +1,13 @@
+{
+  "_comment": "Build with `packer build -var-file=centos6.json centos.json`",
+  "vm_name": "centos6",
+  "cpus": "1",
+  "disk_size": "65536",
+  "http_directory": "kickstart/centos6",
+  "update": "true",
+  "iso_checksum": "48908ca17bc4ba2fb8e365c9fe7648eb6cd6bd67",
+  "iso_checksum_type": "sha1",
+  "iso_name": "CentOS-6.10-x86_64-bin-DVD1.iso",
+  "iso_url": "http://mirror.yandex.ru/centos/6/isos/x86_64/CentOS-6.10-x86_64-bin-DVD1.iso",
+  "memory": "512"
+}

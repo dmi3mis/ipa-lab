@@ -449,7 +449,7 @@ Installing:
  1C_Enterprise83-server          x86_64      8.3.13-1513        /1C_Enterprise83-server-8.3.13-1513.x86_64          459 M  
  1C_Enterprise83-server-nls      x86_64      8.3.13-1513        /1C_Enterprise83-server-nls-8.3.13-1513.x86_64      172 M  
  1C_Enterprise83-ws              x86_64      8.3.13-1513        /1C_Enterprise83-ws-8.3.13-1513.x86_64              530 k  
- 1C_Enterprise83-ws-nls          x86_64      8.3.13-1513        /1C_Enterprise83-ws-nls-8.3.13-1513.x86_64          135 k 
+ 1C_Enterprise83-ws-nls          x86_64      8.3.13-1513        /1C_Enterprise83-ws-nls-8.3.13-1513.x86_64          135 k
  Installing for dependencies:
  libpng12                        x86_64      1.2.50-10.el7      base                                                171 k
 ...
