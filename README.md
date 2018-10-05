@@ -1,8 +1,7 @@
-> Внимание! Инструкции к практическим занятиям находятся [вот тут рядом в папке Instructions](https://github.com/dmi3mis/ipa-lab/blob/master/Instructions/Readme.md)
 
 # ipa-lab
 
-## Зачем?
+## Что это?
 Это виртуальные машины для практик по интеграции Active Directory и IPA.
 Идея была в том, чтобы быстро и автоматически поднять предсказуемую тестовую среду, в которой был бы сразу поднят готовый Active Directory домен и были преднастроены виртуальные машины на GNU/Linux так чтобы можно было тестировать поднятие IPA домена, включение в него машин, поднятие интегрированных с ним сервисов, ну а самое главное, соединить межлесовым доверительным отношением IPA домен с Active Directory. Тестовую среду легко настроить под свои нужды, отредактировать конфиг файл и перезапустив развертывание.
 
@@ -39,21 +38,6 @@
 
 > Note: Oracle Virtualbox бесплатен, но [VMWare Desktop vagrant plugin](https://www.vagrantup.com/vmware/#buy-now) стоит $80.
 
-Если вы хотите сами создать образы Windows:
-
-```bash
-$ cd ipa-lab/Packer
-$ packer build --only=[vmware|virtualbox]-iso windows_10.json
-$ packer build --only=[vmware|virtualbox]-iso windows_2016.json
-```
-
-Теперь импортируйте созданные образы
-
-```bash
-vagrant box add --name dmi3mis/windows_10 windows_10_virtualbox.box
-vagrant box add --name dmi3mis/windows_2016 windows_2016_virtualbox.box
-```
-
 Как запустить среду?
 
 1. git clone https://github.com/dmi3mis/ipa-lab
@@ -76,3 +60,5 @@ Vagrant commands must be run from the "Vagrant" folder.
 * Resume the lab environment: `vagrant resume`
 
 ---
+
+> Внимание! Инструкции к практическим занятиям находятся. [вот тут рядом в папке Instructions](https://github.com/dmi3mis/ipa-lab/blob/master/Instructions/Readme.md)
