@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
   windomainname    = "domain.com"
   ipadomainname    = "example.com"
 
-  config.vagrant.plugins = ["vagrant-vbguest", "vagrant-timezone", "vagrant-hosts", "vagrant-reload" ]
+  config.vagrant.plugins = ["vagrant-vbguest", "vagrant-timezone", "vagrant-reload" ]
   config.timezone.value = :host
   
   if ENV['VBOX_VM_PATH']
